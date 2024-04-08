@@ -1,0 +1,81 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+# SIHR
+
+This package is to perform statistical inference in high-dimensional generalized linear models with continuous and binary outcomes. It provides functionalities for constructing confidence intervals and performing hypothesis tests for low-dimensional objectives in both one-sample and two-sample regression settings.
+
+## Introduction
+In many applications, it is common to encounter regression problems where the number of covariates
+$p$ exceeds the sample size $n$. It is known that estimators fitted via penalized maximum likelihood (including Lasso and Ridge)
+are not ready for statistical inference due to the non-negligible estimation bias induced by the penalty term.
+This package builds on the debiasing inference
+method and targets a wide range of inference problems in high-dimensional GLMs for both continuous and binary outcomes. 
+
+We illustrate the effect of bias correction using the following example. 
+With $n=200, p=200$, the data is generated as follows:
+\[
+X_i \sim \mathcal{N}({\bf 0}_p, {\bf I}_p),\quad Y_i = X_i^\intercal \beta + \epsilon_i, \quad \beta = ({\bf 0.5}_{5}, \frac{1}{5}, \frac{2}{5}, \frac{3}{5}, \frac{4}{5}, \frac{5}{5}, {\bf 0}_{p-10}),\quad \epsilon_i\sim \mathcal{N}(0,1).
+\]
+Our goal is to establish inference for the first coefficient $\beta_1 =0.5$.
+Figure \ref{fig: effect-debias} depicts the histograms of Lasso estimators implemented by package \texttt{glmnet} and our debiased method, respectively, collected from 500 rounds of simulations. It is evident that our method saves the bias from the Lasso estimators.
+<!-- \begin{figure}[!ht] -->
+<!-- \centering -->
+<!-- \includegraphics[width=0.8\linewidth]{effect-debias.pdf} -->
+<!-- \label{fig: effect-debias} -->
+<!-- \end{figure} -->
+
+## Installation
+
+You can install the development version from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("prabrishar1/SIHR")
+```
+
+## Results
+We consider the high-dimensional GLM: for $1\leq i\leq n$,
+\begin{equation}
+    \mathbb{E}(y_i \mid X_{i\cdot}) = f(X_{i\cdot}^\intercal \beta),\quad \textrm{with}\;
+    f(z) = \begin{cases}
+        z & \quad \textrm{for linear model;}\\
+        \exp{(z)} / \left[1 + \exp{(z)} \right] & \quad \textrm{for logistic model;} \\
+        %\Phi(z) & \quad \textrm{for probit model}
+    \end{cases}
+    \label{eq: glm}
+\end{equation}
+where $\beta \in \mathbb{R}^p$ denotes the high-dimensional regression vector. In addition to the one-sample setting, we examine the statistical inference methods for the two-sample regression models. Particularly, we generalize the regression model in \eqref{eq: glm} and consider:
+\begin{equation}
+    \mathbb{E}(y_i^{(k)} \mid X_{i\cdot}^{(k)}) = f(X_{i\cdot}^{(k)\intercal} \beta^{(k)}) \quad \textrm{with}\; k=1,2 \; \textrm{and}\; 1\leq i\leq n_k,
+    \label{eq: two sample glm}
+\end{equation}
+where $f(\cdot)$ is the pre-specified link function defined as \eqref{eq: glm}.
+
+This package consists of five main functions \texttt{LF}, \texttt{QF}, \texttt{CATE}, \texttt{InnProd}, and \texttt{Dist} implementing the statistical inferences for five different quantities, under the one-sample model \eqref{eq: glm} or two-sample model \eqref{eq: two sample glm}.
+\begin{enumerate}
+    \item \texttt{LF}, abbreviated for linear functional, implements the inference approach for $\xnew^\intercal \beta$, with $\xnew \in \RR^p$ denoting a loading vector.
+    With $\xnew = e_j$ as a special case, \texttt{LF} infers the regression coefficient $\beta_j$.
+    \item \texttt{QF}, abbreviated for quadratic functional, makes inferences for $\beta^{\intercal} A \beta$. $A$ is either a pre-specified submatrix or the unknown covariance matrix $\mathbb{E}(X_{i\cdot}X_{i\cdot}^\intercal)$.
+
+    \item \texttt{CATE}, abbreviated for conditional average treatment effect, is to make inference for $f(\xnew^\intercal \beta^{(2)}) - f(\xnew^\intercal \beta^{(1)})$. This difference measures the discrepancy between conditional means, closely related to the conditional average treatment effect for the new observation with covariates $\xnew$.
+
+    \item \texttt{InnProd}, abbreviated for inner products, implements the statistical inference for $\beta^{(1)\intercal} A \beta^{(2)}$. The inner products measure the similarity between the high-dimensional vectors $\beta^{(1)}$ and $\beta^{(2)}$, which is useful in capturing the genetic relatedness in the GWAS applications.
+ 
+    \item \texttt{Dist}, short-handed for distance, makes inferences for the weighted distances  $\gamma^\intercal A \gamma$ with $\gamma = \beta^{(2)} - \beta^{(1)}$. The distance measure is useful in comparing different high-dimensional regression vectors.
+\end{enumerate}
