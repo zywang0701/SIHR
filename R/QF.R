@@ -131,7 +131,7 @@ QF = function(X, y, G, A=NULL, model=c("linear","logistic","logistic_alter"),
   loading.norm = sqrt(sum(loading^2))
 
   ## Correction Direction
-  direction = compute_direction(loading, X.filter, weight.filter, deriv.filter)
+  direction = compute_direction(loading, X.filter, weight.filter, deriv.filter, verbose)
 
   ## Bias Correction
   est.plugin = as.numeric(t(beta.init[G]) %*% A %*% beta.init[G])

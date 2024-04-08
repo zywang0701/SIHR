@@ -141,7 +141,7 @@ LF = function(X, y, loading.mat, model=c("linear","logistic","logistic_alter"),
     loading.norm = sqrt(sum(loading^2))
 
     ## Correction Direction
-    direction = compute_direction(loading, X.filter, weight.filter, deriv.filter)
+    direction = compute_direction(loading, X.filter, weight.filter, deriv.filter, verbose)
 
     ## Bias Correction
     est.plugin = sum(beta.init * loading)
