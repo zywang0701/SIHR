@@ -35,7 +35,7 @@ considerable bias. Conversely, our **SIHR** estimators, shown in the
 right subfigure, are unbiased and thus ready for valid statistical
 inference.
 
-<div class="figure" style="text-align: center">
+<div class="figure" style="text-align: center" align="center">
 
 <img src="./images/SIHR-bias.png" alt="Illustration of Bias Correction" width="80%" />
 <p class="caption">
@@ -59,7 +59,7 @@ devtools::install_github("zywang0701/SIHR")
 The package consists of 5 main functions in one or two samples regime,
 with different low-dimensional objectives, respectively.
 
-<div class="figure" style="text-align: center">
+<div class="figure" style="text-align: center" align="center">
 
 <img src="./images/Outline-SIHR.png" alt="Outline of SIHR" width="80%" />
 <p class="caption">
