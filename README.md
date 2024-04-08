@@ -24,9 +24,9 @@ To demonstrate the effect of bias correction, we conducted 250
 simulation rounds. The data generation process is defined with
 $n=p=200$: for $1\leq i\leq n$, 
 
-$$
+```math
 X_i \sim \mathcal{N}({\bf 0}_p, {\bf I}_p),\quad Y_i = X_i^\intercal \beta + \epsilon_i, \quad \beta = ({\bf 0.5}_{5}, \frac{1}{5}, \frac{2}{5}, \frac{3}{5}, \frac{4}{5}, \frac{5}{5}, {\bf 0}_{p-10}),\quad \epsilon_i\sim \mathcal{N}(0,1).
-$$ 
+```
 
 Our objective was to conduct inference on the first coefficient
 $e_1^\intercal \beta = 0.5$. However, as illustrated in the left
