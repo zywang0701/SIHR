@@ -63,6 +63,7 @@ QF = function(X, y, G, A=NULL, model=c("linear","logistic","logistic_alter"),
 
   ## Check arguments
   model = match.arg(model)
+  X = as.matrix(X); y = as.vector(y); G = as.vector(G)
   nullA = ifelse(is.null(A), TRUE, FALSE)
   check.args.QF(X=X, y=y, G=G, A=A, model=model, intercept=intercept, beta.init=beta.init,
                 split=split, lambda=lambda, mu=mu, prob.filter=prob.filter,
@@ -131,7 +132,7 @@ QF = function(X, y, G, A=NULL, model=c("linear","logistic","logistic_alter"),
   loading.norm = sqrt(sum(loading^2))
 
   ## Correction Direction
-  direction = compute_direction(loading, X.filter, weight.filter, deriv.filter, verbose)
+  direction = compute_direction(loading, X.filter, weight.filter, deriv.filter, mu, verbose)
 
   ## Bias Correction
   est.plugin = as.numeric(t(beta.init[G]) %*% A %*% beta.init[G])

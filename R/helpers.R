@@ -182,7 +182,7 @@ Direction_fixedtuning = function(X, loading, weight, deriv, mu=NULL, resol=1.5, 
               mu=mu))
 }
 
-compute_direction = function(loading, X, weight, deriv, verbose=FALSE){
+compute_direction = function(loading, X, weight, deriv, mu=NULL, verbose=FALSE){
   n = nrow(X); p = ncol(X)
   loading.norm = sqrt(sum(loading^2))
 

@@ -1,0 +1,160 @@
+---
+title: "Examples of Usage"
+author: "Zhenyu (Zach) Wang"
+date: '2024-04-08'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Usage of functions LF and QF in Linear/Logistic regression settings
+
+We propose a few examples on the usage of SIHR to simulated dataset. We will show how to conduct inference for linear functionals (LF) and quadratic functionals (QF) on linear and logistic regression settings, respectively.
+
+Load the library:
+```{r}
+library(SIHR)
+```
+
+## Linear Regression Setting
+We consider the setting that $n=200, p=150$ with
+$$
+X_i \sim N(\textbf{0}_p, \textbf{I}_p),\quad Y_i = \alpha + X_i^\intercal \beta + \epsilon_i, \quad \epsilon_i\sim N(0,1),\\
+\textrm{where }\; \alpha = -0.5, \quad \beta = (0.5, \textbf{1}_4, \textbf{0}_{p-5}).
+$$
+Our goal is to construct valid inference for objectives:
+
+1. $\beta_1 = 0.5$
+2. $\beta_1 + \beta_2 = 1.5$
+3. $\beta_{G}^\intercal \Sigma_{G,G} \beta_{G} = 3.25$, where $\Sigma=\mathbb{E}[X_i^\intercal X_i] = \textbf{I}_p$ and $G=\{1,2,3,4\}$.
+
+The 1st and 2nd objectives will be achieved togther by *LF( )*, while the 3d objective will be conducted with *QF( )*.
+
+Generate Data
+```{r}
+set.seed(0)
+n = 200; p = 150
+X = matrix(rnorm(n*p), nrow=n, ncol=p)
+y = -0.5 + X%*%c(0.5, rep(1,4), rep(0, p-5))
+```
+
+### LF: Linear Functionals 
+Loadings for Linear Functionals
+```{r}
+loading1 = c(1, rep(0, p-1)) # for 1st objective, true value = 0.5
+loading2 = c(1, 1, rep(0, p-2)) # for 2nd objective, true value = 1.5
+loading.mat = cbind(loading1, loading2)
+```
+
+Conduct Inference, call `LF` with `model="linear"`:
+```{r}
+Est = LF(X, y, loading.mat, model="linear", intercept=TRUE, intercept.loading=FALSE, verbose=TRUE)
+```
+The parameter `intercept` indicates whether we fit the model with/without intercept term. The parameter `intercept.loading` indicates whether we include intercept term in the inference objective. In this example, the model is fitted with intercept, but we do not include it in our final objective.
+
+Methods for `LF`
+```{r}
+ci(Est)
+summary(Est)
+```
+
+Notice that the true values are $0.5$ and $1.5$ for 1st and 2nd objective respectively, both are included in their corresponding confidence interval. Also it is evident that our bias-corrected estimators is much closer to the true values than the Lasso estimators.
+
+### QF: Quadratic Functionals
+For quadratic functionals, we need to specify the subset $G \subseteq [p]$. If argument $A$ is not specified (default = NULL), we will automatically conduct inference on $\beta_G \Sigma_{G,G} \beta_G$.
+```{r}
+G = c(1:4) # 3rd objective, true value = 3.25
+```
+Conduct Inference, call `QF` with `model="linear"`. The argument `split` indicates whether we split samples or not for computing the initial estimator.
+```{r}
+Est = QF(X, y, G, A=NULL, model="linear", intercept=TRUE, verbose=TRUE)
+```
+
+`ci` method for QF
+```{r}
+ci(Est)
+```
+`summary` method for QF
+```{r}
+summary(Est)
+```
+
+In the output results, each row represents the result for different values of $\tau$, the enlargement factor for asymptotic variance to handle super-efficiency. Notice that the true value is $3.25$ for 3rd objective, which is included in the confidence interval.
+
+## Logistic Regression Setting
+The procedures of usage in the logistic regression setting are almost the same as the one in linear setting, except that we need to specify the argument `model="logistic"` or `model="logistic_alter"`, instead of `model="linear"`. We propose two different debiasing methods for logistic regression, both work theoretically and empiricially.
+
+We consider the setting that $n=200, p=150$ with
+$$
+X_i \sim N(\textbf{0}_p, \textbf{I}_p),\quad P_i = \frac{\exp(\alpha + X_i^\intercal \beta)}{1+\exp(\alpha + X_i^\intercal \beta)},\quad Y_i = {\rm Binomial}(P_i),\\
+\textrm{where }\; \alpha = -0.5, \quad \beta = (0.5, 1, \textbf{0}_{p-2}).
+$$
+Our goal is to construct valid inference for objectives:
+
+1. $\beta_1 + \beta_2 = 1.5$
+2. $-\frac{1}{2}\beta_1 - \beta_2 = -1.25$
+3. $\beta_{G}^\intercal \Sigma_{G,G} \beta_{G} = 1.25$, where $\Sigma=\mathbb{E}[X_i^\intercal X_i] = \textbf{I}_p$ and $G=\{1,2,3\}$.
+
+The 1st and 2nd objectives will be achieved togther by *LF( )*, while the 3d objective will be conducted with *QF( )*.
+
+Generate Data
+```{r}
+set.seed(1)
+n = 200; p = 120
+X = matrix(rnorm(n*p), nrow=n, ncol=p)
+val = -1.5 + X[,1]*0.5 + X[,2]*1
+prob = exp(val)/(1+exp(val))
+y = rbinom(n, 1, prob)
+```
+
+### LF: Linear Functionals 
+Loadings for Linear Functionals
+```{r}
+loading1 = c(1, 1, rep(0, p-2)) # for 1st objective, true value = 1.5
+loading2 = c(-0.5, -1, rep(0, p-2)) # for 2nd objective, true value = -1.25
+loading.mat = cbind(loading1, loading2)
+```
+
+Conduct Inference, call `LF` with `model="logistic"` or `model="logistic_alter"`:
+```{r}
+Est = LF(X, y, loading.mat, model="logistic", verbose=TRUE)
+```
+
+Methods for `LF`
+```{r}
+ci(Est)
+summary(Est)
+```
+
+Notice that the true values are $1.5$ and $-1.25$ for 1st and 2nd objective respectively, both are included in their corresponding confidence interval. Also it is evident that our bias-corrected estimators is much closer to the true values than the Lasso estimators.
+
+### QF: Quadratic Functionals
+For quadratic functionals, we find that sufficient larger sample size is needed for better empirical result, since we need to split samples to obtain initial estimators. Thus, we generate another simulated data but with larger sample size $n=400$.
+```{r}
+set.seed(0)
+n = 400; p = 120
+X = matrix(rnorm(n*p), nrow=n, ncol=p)
+val = -1.5 + X[,1]*0.5 + X[,2]*1
+prob = exp(val)/(1+exp(val))
+y = rbinom(n, 1, prob)
+G = c(1:3) # 3rd objective, true value = 1.25
+```
+Conduct Inference, call `QF` with `model="logistic_alter"`.
+```{r}
+Est = QF(X, y, G, A=NULL, model="logistic_alter", intercept=TRUE, verbose=TRUE)
+```
+
+`ci` method for QF
+```{r}
+ci(Est)
+```
+`summary` method for QF
+```{r}
+summary(Est)
+```
+
+In the output results, each row represents the result for different values of $\tau$, the enlargement factor for asymptotic variance to handle super-efficiency. Notice that the true value is $3.25$ for 3rd objective, which is included in the confidence interval.
+
+

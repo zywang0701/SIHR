@@ -64,7 +64,7 @@ LF = function(X, y, loading.mat, model=c("linear","logistic","logistic_alter"),
 
   ## Check arguments
   model = match.arg(model)
-  loading.mat = as.matrix(loading.mat)
+  X = as.matrix(X); y = as.vector(y); loading.mat = as.matrix(loading.mat)
   check.args.LF(X=X, y=y, loading.mat=loading.mat, model=model, intercept=intercept,
                 intercept.loading=intercept.loading, beta.init=beta.init, lambda=lambda,
                 mu=mu, rescale=rescale, prob.filter=prob.filter, alpha=alpha,
@@ -141,7 +141,7 @@ LF = function(X, y, loading.mat, model=c("linear","logistic","logistic_alter"),
     loading.norm = sqrt(sum(loading^2))
 
     ## Correction Direction
-    direction = compute_direction(loading, X.filter, weight.filter, deriv.filter, verbose)
+    direction = compute_direction(loading, X.filter, weight.filter, deriv.filter, mu, verbose)
 
     ## Bias Correction
     est.plugin = sum(beta.init * loading)
