@@ -1,12 +1,17 @@
 ---
-title: "Examples of Usage"
-author: "Zhenyu (Zach) Wang"
-date: '2024-04-08'
-output: html_document
+title: "QuickStart"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{QuickStart}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
 ```
 
 # Usage of functions LF and QF in Linear/Logistic regression settings
@@ -156,5 +161,4 @@ summary(Est)
 ```
 
 In the output results, each row represents the result for different values of $\tau$, the enlargement factor for asymptotic variance to handle super-efficiency. Notice that the true value is $3.25$ for 3rd objective, which is included in the confidence interval.
-
 

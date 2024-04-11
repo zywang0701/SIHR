@@ -23,3 +23,7 @@ Imports:
     CVXR,
     glmnet,
     stats
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
