@@ -27,11 +27,17 @@ high dimensional generalized linear regressions — CATE"><meta property="og:des
       <ul class="navbar-nav me-auto"><li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/QuickStart.html">QuickStart</a>
+  </div>
+</li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
       <ul class="navbar-nav"><li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/prabrishar1/SIHR/" aria-label="github">
+  <a class="external-link nav-link" href="https://github.com/zywang0701/SIHR/" aria-label="github">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -45,7 +51,7 @@ high dimensional generalized linear regressions — CATE"><meta property="og:des
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Inference for difference of linear combinations of the regression vectors in
 high dimensional generalized linear regressions</h1>
-      <small class="dont-index">Source: <a href="https://github.com/prabrishar1/SIHR/blob/HEAD/R/CATE.R" class="external-link"><code>R/CATE.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/zywang0701/SIHR/blob/HEAD/R/CATE.R" class="external-link"><code>R/CATE.R</code></a></small>
       <div class="d-none name"><code>CATE.Rd</code></div>
     </div>
 
@@ -215,8 +221,8 @@ the row corresponding to different column in <code>loading.mat</code>.</p></dd>
 <span class="r-in"><span><span class="co">## compute confidence intervals</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="ci.html">ci</a></span><span class="op">(</span><span class="va">Est</span>, alpha<span class="op">=</span><span class="fl">0.05</span>, alternative<span class="op">=</span><span class="st">"two.sided"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   loading      lower     upper</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1       1 -0.4451749 0.4850586</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2       2 -0.3723316 0.3767132</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1       1 -0.4561766 0.4248768</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2       2 -0.3945020 0.2827686</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## summary statistics</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">Est</span><span class="op">)</span></span></span>
@@ -224,9 +230,9 @@ the row corresponding to different column in <code>loading.mat</code>.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Inference for Treatment Effect</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Estimators: </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  loading est.plugin est.debias Std. Error z value Pr(&gt;|z|)  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1  0.0344108   0.019942     0.2373 0.08403   0.9330  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2  0.0006611   0.002191     0.1911 0.01146   0.9909  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  loading est.plugin est.debias Std. Error  z value Pr(&gt;|z|)  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1    -0.2447   -0.01565     0.2248 -0.06963   0.9445  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2     0.1137   -0.05587     0.1728 -0.32335   0.7464  </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

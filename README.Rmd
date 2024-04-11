@@ -29,7 +29,7 @@ $$
 Our objective was to conduct inference on the first coefficient $e_1^\intercal \beta = 0.5$. However, as illustrated in the left subfigure, Lasso estimators from the **glmnet** package exhibit considerable bias. Conversely, our **SIHR** estimators, shown in the right subfigure, are unbiased and thus ready for valid statistical inference.
 
 ```{r, echo=FALSE, fig.align='center', fig.cap="Illustration of Bias Correction", out.width = '80%'}
-knitr::include_graphics("./images/SIHR-bias.png")
+knitr::include_graphics("./man/figures/SIHR-bias.png")
 ```
 
 
@@ -46,7 +46,7 @@ devtools::install_github("zywang0701/SIHR")
 ## Getting Started
 The package consists of 5 main functions in one or two samples regime, with different low-dimensional objectives, respectively.
 ```{r, echo=FALSE, fig.align='center', fig.cap="Outline of SIHR", out.width = '80%'}
-knitr::include_graphics("./images/Outline-SIHR.png")
+knitr::include_graphics("./man/figures/Outline-SIHR.png")
 ``` 
 
 To illustrate the usage of these functions, we apply SIHR to simulated data in the example.

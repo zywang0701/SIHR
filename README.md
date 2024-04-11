@@ -37,7 +37,7 @@ inference.
 
 <div class="figure" style="text-align: center" align="center">
 
-<img src="./images/SIHR-bias.png" alt="Illustration of Bias Correction" width="80%" />
+<img src="./man/figures/SIHR-bias.png" alt="Illustration of Bias Correction" width="80%" />
 <p class="caption">
 Illustration of Bias Correction
 </p>
@@ -61,7 +61,7 @@ with different low-dimensional objectives, respectively.
 
 <div class="figure" style="text-align: center" align="center">
 
-<img src="./images/Outline-SIHR.png" alt="Outline of SIHR" width="80%" />
+<img src="./man/figures/Outline-SIHR.png" alt="Outline of SIHR" width="80%" />
 <p class="caption">
 Outline of SIHR
 </p>
