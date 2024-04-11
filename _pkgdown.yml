@@ -6,3 +6,16 @@ template:
       domain: example.com
       src: https://example.com/tracker.js
     toggle: manual
+
+navbar:
+  structure:
+    left:  [intro, reference, articles, tutorials, news]
+    right: [search, github]
+  components:
+    articles:
+      text: Articles
+      menu:
+      - text: Intro of Debiasing Methods
+        href: articles/IntroMethod.pdf
+      - text: Intro of Usage
+        href: articles/IntroUsage.pdf

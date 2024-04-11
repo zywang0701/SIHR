@@ -43,6 +43,19 @@ generalized linear regression"><!-- mathjax --><script src="https://cdnjs.cloudf
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu"><li>
+      <a href="../articles/IntroMethod.pdf">Intro of Debiasing Methods</a>
+    </li>
+    <li>
+      <a href="../articles/IntroUsage.pdf">Intro of Usage</a>
+    </li>
+  </ul></li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
           <a href="#" id="css-toggle-btn">
             <span class="fas fa-adjust fa-lg"></span>
@@ -200,9 +213,9 @@ to a loading of interest.</p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## compute confidence intervals</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="ci.html">ci</a></span><span class="op">(</span><span class="va">Est</span>, alpha<span class="op">=</span><span class="fl">0.05</span>, alternative<span class="op">=</span><span class="st">"two.sided"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   loading     lower     upper</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1       1  1.362252  1.872179</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2       2 -1.536390 -1.124263</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   loading     lower      upper</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1       1  1.078425  1.6858802</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2       2 -1.383068 -0.9132441</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## summary statistics</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">Est</span><span class="op">)</span></span></span>
@@ -210,9 +223,9 @@ to a loading of interest.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Inference for Linear Functional</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Estimators: </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  loading est.plugin est.debias Std. Error z value  Pr(&gt;|z|)    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1      1.609      1.617     0.1301   12.43 0.000e+00 ***</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2     -1.324     -1.330     0.1051  -12.65 1.072e-36 ***</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  loading est.plugin est.debias Std. Error z value Pr(&gt;|z|)    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1      1.211      1.382     0.1550   8.919 0.00e+00 ***</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2     -1.021     -1.148     0.1199  -9.580 9.75e-22 ***</span>
 </code></pre></div>
     </div>
   </div>

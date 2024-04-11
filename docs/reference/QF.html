@@ -43,6 +43,19 @@ generalized linear regressions"><!-- mathjax --><script src="https://cdnjs.cloud
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu"><li>
+      <a href="../articles/IntroMethod.pdf">Intro of Debiasing Methods</a>
+    </li>
+    <li>
+      <a href="../articles/IntroUsage.pdf">Intro of Usage</a>
+    </li>
+  </ul></li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
           <a href="#" id="css-toggle-btn">
             <span class="fas fa-adjust fa-lg"></span>
@@ -207,9 +220,9 @@ form of the regression vector; row corresponds to different values of
 <span class="r-in"><span><span class="co">## compute confidence intervals</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="ci.html">ci</a></span><span class="op">(</span><span class="va">Est</span>, alpha<span class="op">=</span><span class="fl">0.05</span>, alternative<span class="op">=</span><span class="st">"two.sided"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    tau    lower    upper</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 0.25 1.268344 3.153559</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 0.50 1.258211 3.163693</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 1.00 1.238259 3.183645</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 0.25 1.600715 3.940744</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 0.50 1.592535 3.948923</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 1.00 1.576344 3.965114</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## summary statistics</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">Est</span><span class="op">)</span></span></span>
@@ -217,9 +230,9 @@ form of the regression vector; row corresponds to different values of
 <span class="r-out co"><span class="r-pr">#&gt;</span> Inference for Quadratic Functional</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   tau est.plugin est.debias Std. Error z value  Pr(&gt;|z|)    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.25     0.9486      2.211     0.4809   4.597 4.281e-06 ***</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.50     0.9486      2.211     0.4861   4.548 5.407e-06 ***</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1.00     0.9486      2.211     0.4963   4.455 8.388e-06 ***</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.25      1.527      2.771     0.5970   4.641 3.460e-06 ***</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.50      1.527      2.771     0.6011   4.609 4.042e-06 ***</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1.00      1.527      2.771     0.6094   4.547 5.449e-06 ***</span>
 </code></pre></div>
     </div>
   </div>

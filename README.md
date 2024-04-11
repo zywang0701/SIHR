@@ -51,7 +51,8 @@ devtools::install_github("zywang0701/SIHR")
 ## Getting Started
 
 The package consists of 5 main functions in one or two samples regime,
-with different low-dimensional objectives, respectively.
+with different low-dimensional objectives, respectively. Having fitted
+the model, it allows for two methods to report the result.
 
 <div class="figure" style="text-align: center" align="center">
 
@@ -62,5 +63,8 @@ Outline of SIHR
 
 </div>
 
-To illustrate the usage of these functions, we apply SIHR to simulated
-data in the example.
+We have prepared several vignettes to help me get ready with **SIHR**:
+
+* Begin with the [Get Started](articles/SIHR.html) guide for an initial usage of the package.
+* For an in-depth exploration of the package's functionality, consult the [Intro of Usage](articles/IntroUsage.pdf).
+* To gain insights into the debiasing methods incorporated within the package, refer to our [Intro of Debiasing Methods](articles/IntroMethod.pdf).

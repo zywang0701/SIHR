@@ -44,6 +44,19 @@ high dimensional generalized linear regressions — CATE"><meta property="og:des
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu"><li>
+      <a href="../articles/IntroMethod.pdf">Intro of Debiasing Methods</a>
+    </li>
+    <li>
+      <a href="../articles/IntroUsage.pdf">Intro of Usage</a>
+    </li>
+  </ul></li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
           <a href="#" id="css-toggle-btn">
             <span class="fas fa-adjust fa-lg"></span>
@@ -239,9 +252,9 @@ the row corresponding to different column in <code>loading.mat</code>.</p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## compute confidence intervals</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="ci.html">ci</a></span><span class="op">(</span><span class="va">Est</span>, alpha<span class="op">=</span><span class="fl">0.05</span>, alternative<span class="op">=</span><span class="st">"two.sided"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   loading      lower     upper</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1       1 -0.3995496 0.4425453</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2       2 -0.3896143 0.3064973</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   loading      lower        upper</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1       1  0.0320884  0.833697990</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2       2 -0.6485737 -0.001400007</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## summary statistics</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">Est</span><span class="op">)</span></span></span>
@@ -250,8 +263,8 @@ the row corresponding to different column in <code>loading.mat</code>.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Estimators: </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  loading est.plugin est.debias Std. Error z value Pr(&gt;|z|)  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1  -0.002506    0.02150     0.2148  0.1001   0.9203  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2  -0.025766   -0.04156     0.1776 -0.2340   0.8150  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1     0.3931     0.4329     0.2045   2.117  0.03427 *</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2    -0.2913    -0.3250     0.1651  -1.968  0.04902 *</span>
 </code></pre></div>
     </div>
   </div>
