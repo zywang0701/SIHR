@@ -1,8 +1,8 @@
 ---
-title: "QuickStart"
+title: "Quick Start to SIHR"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{QuickStart}
+  %\VignetteIndexEntry{Quick Start to SIHR}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -26,8 +26,8 @@ library(SIHR)
 ## Linear Regression Setting
 We consider the setting that $n=200, p=150$ with
 $$
-X_i \sim N(\textbf{0}_p, \textbf{I}_p),\quad Y_i = \alpha + X_i^\intercal \beta + \epsilon_i, \quad \epsilon_i\sim N(0,1),\\
-\textrm{where }\; \alpha = -0.5, \quad \beta = (0.5, \textbf{1}_4, \textbf{0}_{p-5}).
+X_i \sim N(\textbf{0}_p, \textbf{I}_p),\; Y_i = \alpha + X_i^\intercal \beta + \epsilon_i, \; \epsilon_i\sim N(0,1),\;
+\textrm{where }\; \alpha = -0.5, \; \beta = (0.5, \textbf{1}_4, \textbf{0}_{p-5}).
 $$
 Our goal is to construct valid inference for objectives:
 
@@ -93,8 +93,8 @@ The procedures of usage in the logistic regression setting are almost the same a
 
 We consider the setting that $n=200, p=150$ with
 $$
-X_i \sim N(\textbf{0}_p, \textbf{I}_p),\quad P_i = \frac{\exp(\alpha + X_i^\intercal \beta)}{1+\exp(\alpha + X_i^\intercal \beta)},\quad Y_i = {\rm Binomial}(P_i),\\
-\textrm{where }\; \alpha = -0.5, \quad \beta = (0.5, 1, \textbf{0}_{p-2}).
+X_i \sim N(\textbf{0}_p, \textbf{I}_p),\; P_i = \frac{\exp(\alpha + X_i^\intercal \beta)}{1+\exp(\alpha + X_i^\intercal \beta)},\; Y_i = {\rm Binomial}(P_i),\;
+\textrm{where }\; \alpha = -0.5, \;\beta = (0.5, 1, \textbf{0}_{p-2}).
 $$
 Our goal is to construct valid inference for objectives:
 

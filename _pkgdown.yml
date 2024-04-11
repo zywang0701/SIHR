@@ -1,4 +1,8 @@
 url: ~
 template:
-  bootstrap: 5
-
+  package: preferably
+  params:
+    canalytic:
+      domain: example.com
+      src: https://example.com/tracker.js
+    toggle: manual
