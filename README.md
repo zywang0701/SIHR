@@ -65,6 +65,6 @@ Outline of SIHR
 
 We have prepared several vignettes to help me get ready with **SIHR**:
 
-* Begin with the [Get Started](articles/SIHR.html) guide for an initial usage of the package.
-* For an in-depth exploration of the package's functionality, consult the [Intro of Usage](articles/IntroUsage.pdf).
-* To gain insights into the debiasing methods incorporated within the package, refer to our [Intro of Debiasing Methods](articles/IntroMethod.pdf).
+* Begin with the [Get Started](./articles/SIHR.html) guide for an initial usage of the package.
+* For an in-depth exploration of the package's functionality, consult the [Intro of Usage](./articles/IntroUsage.pdf).
+* To gain insights into the debiasing methods incorporated within the package, refer to our [Intro of Debiasing Methods](./articles/IntroMethod.pdf).
