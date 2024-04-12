@@ -7,7 +7,7 @@
 #' @param ... arguments to pass down
 #' @keywords internal
 #' @export
-ci = function(object, probability=FALSE, alpha=0.05, alternative=c("two.sided","less","greater"), ...){
+ci <- function(object, probability = FALSE, alpha = 0.05, alternative = c("two.sided", "less", "greater"), ...) {
   UseMethod("ci")
 }
 
@@ -27,25 +27,25 @@ ci = function(object, probability=FALSE, alpha=0.05, alternative=c("two.sided","
 #' @export
 #' @examples
 #' \dontrun{
-#' ##-- Continuing the LF(.) example:
-#' out = ci(Est)
+#' ## -- Continuing the LF(.) example:
+#' out <- ci(Est)
 #' out
 #' }
-ci.LF = function(object, probability=FALSE, alpha=0.05, alternative=c("two.sided","less","greater"), ...){
-  alternative = match.arg(alternative)
-  est.debias.vec = object$est.debias.vec
-  se.vec         = object$se.vec
-  n.loading = length(se.vec)
-  if(alternative=="two.sided"){
-    output.ci = cbind(est.debias.vec - qnorm(1-alpha/2)*se.vec, est.debias.vec + qnorm(1-alpha/2)*se.vec)
-  }else if(alternative=="less"){
-    output.ci = cbind(-Inf, est.debias.vec + qnorm(1-alpha)*se.vec)
-  }else if(alternative=="greater"){
-    output.ci = cbind(est.debias.vec - qnorm(1-alpha)*se.vec, Inf)
+ci.LF <- function(object, probability = FALSE, alpha = 0.05, alternative = c("two.sided", "less", "greater"), ...) {
+  alternative <- match.arg(alternative)
+  est.debias.vec <- object$est.debias.vec
+  se.vec <- object$se.vec
+  n.loading <- length(se.vec)
+  if (alternative == "two.sided") {
+    output.ci <- cbind(est.debias.vec - qnorm(1 - alpha / 2) * se.vec, est.debias.vec + qnorm(1 - alpha / 2) * se.vec)
+  } else if (alternative == "less") {
+    output.ci <- cbind(-Inf, est.debias.vec + qnorm(1 - alpha) * se.vec)
+  } else if (alternative == "greater") {
+    output.ci <- cbind(est.debias.vec - qnorm(1 - alpha) * se.vec, Inf)
   }
-  if(probability) output.ci = exp(output.ci) / (1 + exp(output.ci))
-  output.ci = data.frame(cbind(1:n.loading, output.ci))
-  colnames(output.ci) = c("loading","lower","upper")
+  if (probability) output.ci <- exp(output.ci) / (1 + exp(output.ci))
+  output.ci <- data.frame(cbind(1:n.loading, output.ci))
+  colnames(output.ci) <- c("loading", "lower", "upper")
   return(output.ci)
 }
 
@@ -61,25 +61,25 @@ ci.LF = function(object, probability=FALSE, alpha=0.05, alternative=c("two.sided
 #' @export
 #' @examples
 #' \dontrun{
-#' ##-- Continuing the LF(.) example:
-#' sEst = summary(Est)
+#' ## -- Continuing the LF(.) example:
+#' sEst <- summary(Est)
 #' sEst
 #' }
-summary.LF = function(object, ...){
-  est.plugin.vec = object$est.plugin.vec
-  est.debias.vec = object$est.debias.vec
-  se.vec         = object$se.vec
-  n.loading = length(se.vec)
-  output.est = data.frame(matrix(NA, nrow=n.loading, ncol=7))
-  colnames(output.est) = c("loading","est.plugin","est.debias","Std. Error","z value","Pr(>|z|)", "")
-  output.est[,1] = 1:n.loading
-  output.est[,c(2,3,4)] = cbind(est.plugin.vec, est.debias.vec, se.vec)
-  output.est[,5] = est.debias.vec / se.vec
-  output.est[,6] = apply(cbind(pnorm(output.est[,5]), 1-pnorm(output.est[,5])), MARGIN = 1, FUN=min)*2
-  output.est[,7] = stars.pval(output.est[,6])
+summary.LF <- function(object, ...) {
+  est.plugin.vec <- object$est.plugin.vec
+  est.debias.vec <- object$est.debias.vec
+  se.vec <- object$se.vec
+  n.loading <- length(se.vec)
+  output.est <- data.frame(matrix(NA, nrow = n.loading, ncol = 7))
+  colnames(output.est) <- c("loading", "est.plugin", "est.debias", "Std. Error", "z value", "Pr(>|z|)", "")
+  output.est[, 1] <- 1:n.loading
+  output.est[, c(2, 3, 4)] <- cbind(est.plugin.vec, est.debias.vec, se.vec)
+  output.est[, 5] <- est.debias.vec / se.vec
+  output.est[, 6] <- apply(cbind(pnorm(output.est[, 5]), 1 - pnorm(output.est[, 5])), MARGIN = 1, FUN = min) * 2
+  output.est[, 7] <- stars.pval(output.est[, 6])
 
-  x = list(output.est = output.est)
-  class(x) = "summary.LF"
+  x <- list(output.est = output.est)
+  class(x) <- "summary.LF"
   x
 }
 
@@ -95,11 +95,11 @@ summary.LF = function(object, ...){
 #' #' ##-- Continuing the LF(.) example:
 #' summary(Est)
 #' }
-print.summary.LF = function(x, digits = max(3, getOption("digits") - 3), ...){
-  output.est = x$output.est
+print.summary.LF <- function(x, digits = max(3, getOption("digits") - 3), ...) {
+  output.est <- x$output.est
   cat("Call: \nInference for Linear Functional\n\n")
   cat("Estimators: \n")
-  print(output.est, digits=digits, quote=F, row.names=F)
+  print(output.est, digits = digits, quote = F, row.names = F)
   invisible(x)
 }
 
@@ -119,43 +119,45 @@ print.summary.LF = function(x, digits = max(3, getOption("digits") - 3), ...){
 #' @export
 #' @examples
 #' \dontrun{
-#' ##-- Continuing the CATE(.) example:
-#' out = ci(Est)
+#' ## -- Continuing the CATE(.) example:
+#' out <- ci(Est)
 #' out
 #' }
-ci.CATE = function(object, probability=FALSE, alpha=0.05, alternative=c("two.sided","less","greater"), ...){
-  alternative = match.arg(alternative)
+ci.CATE <- function(object, probability = FALSE, alpha = 0.05, alternative = c("two.sided", "less", "greater"), ...) {
+  alternative <- match.arg(alternative)
 
-  if(probability==FALSE){
-    est.debias.vec = object$est.debias.vec
-    se.vec         = object$se.vec
-    n.loading = length(se.vec)
-    if(alternative=="two.sided"){
-      output.ci = cbind(est.debias.vec - qnorm(1-alpha/2)*se.vec, est.debias.vec + qnorm(1-alpha/2)*se.vec)
-    }else if(alternative=="less"){
-      output.ci = cbind(-Inf, est.debias.vec + qnorm(1-alpha)*se.vec)
-    }else if(alternative=="greater"){
-      output.ci = cbind(est.debias.vec - qnorm(1-alpha)*se.vec, Inf)
+  if (probability == FALSE) {
+    est.debias.vec <- object$est.debias.vec
+    se.vec <- object$se.vec
+    n.loading <- length(se.vec)
+    if (alternative == "two.sided") {
+      output.ci <- cbind(est.debias.vec - qnorm(1 - alpha / 2) * se.vec, est.debias.vec + qnorm(1 - alpha / 2) * se.vec)
+    } else if (alternative == "less") {
+      output.ci <- cbind(-Inf, est.debias.vec + qnorm(1 - alpha) * se.vec)
+    } else if (alternative == "greater") {
+      output.ci <- cbind(est.debias.vec - qnorm(1 - alpha) * se.vec, Inf)
     }
-  }else{
-    prob.debias.vec = object$prob.debias.vec
-    prob.se.vec = object$prob.se.vec
-    n.loading = length(prob.se.vec)
-    if(n.loading == 0){
+  } else {
+    prob.debias.vec <- object$prob.debias.vec
+    prob.se.vec <- object$prob.se.vec
+    n.loading <- length(prob.se.vec)
+    if (n.loading == 0) {
       stop("For linear model, argument 'probability' must be FALSE\n")
     }
-    if(alternative=="two.sided"){
-      output.ci = cbind(prob.debias.vec - qnorm(1-alpha/2)*prob.se.vec,
-                        prob.debias.vec + qnorm(1-alpha/2)*prob.se.vec)
-    }else if(alternative=="less"){
-      output.ci = cbind(-1, prob.debias.vec + qnorm(1-alpha)*prob.se.vec)
-    }else if(alternative=="greater"){
-      output.ci = cbind(prob.debias.vec - qnorm(1-alpha)*prob.se.vec, 1)
+    if (alternative == "two.sided") {
+      output.ci <- cbind(
+        prob.debias.vec - qnorm(1 - alpha / 2) * prob.se.vec,
+        prob.debias.vec + qnorm(1 - alpha / 2) * prob.se.vec
+      )
+    } else if (alternative == "less") {
+      output.ci <- cbind(-1, prob.debias.vec + qnorm(1 - alpha) * prob.se.vec)
+    } else if (alternative == "greater") {
+      output.ci <- cbind(prob.debias.vec - qnorm(1 - alpha) * prob.se.vec, 1)
     }
   }
 
-  output.ci = data.frame(cbind(1:n.loading, output.ci))
-  colnames(output.ci) = c("loading","lower","upper")
+  output.ci <- data.frame(cbind(1:n.loading, output.ci))
+  colnames(output.ci) <- c("loading", "lower", "upper")
   return(output.ci)
 }
 
@@ -171,25 +173,25 @@ ci.CATE = function(object, probability=FALSE, alpha=0.05, alternative=c("two.sid
 #' @export
 #' @examples
 #' \dontrun{
-#' ##-- Continuing the CATE(.) example:
-#' sEst = summary(Est)
+#' ## -- Continuing the CATE(.) example:
+#' sEst <- summary(Est)
 #' sEst
 #' }
-summary.CATE = function(object, ...){
-  est.plugin.vec = object$est.plugin.vec
-  est.debias.vec = object$est.debias.vec
-  se.vec         = object$se.vec
-  n.loading = length(se.vec)
-  output.est = data.frame(matrix(NA, nrow=n.loading, ncol=7))
-  colnames(output.est) = c("loading","est.plugin","est.debias","Std. Error","z value","Pr(>|z|)", "")
-  output.est[,1] = 1:n.loading
-  output.est[,c(2,3,4)] = cbind(est.plugin.vec, est.debias.vec, se.vec)
-  output.est[,5] = est.debias.vec / se.vec
-  output.est[,6] = apply(cbind(pnorm(output.est[,5]), 1-pnorm(output.est[,5])), MARGIN = 1, FUN=min)*2
-  output.est[,7] = stars.pval(output.est[,6])
+summary.CATE <- function(object, ...) {
+  est.plugin.vec <- object$est.plugin.vec
+  est.debias.vec <- object$est.debias.vec
+  se.vec <- object$se.vec
+  n.loading <- length(se.vec)
+  output.est <- data.frame(matrix(NA, nrow = n.loading, ncol = 7))
+  colnames(output.est) <- c("loading", "est.plugin", "est.debias", "Std. Error", "z value", "Pr(>|z|)", "")
+  output.est[, 1] <- 1:n.loading
+  output.est[, c(2, 3, 4)] <- cbind(est.plugin.vec, est.debias.vec, se.vec)
+  output.est[, 5] <- est.debias.vec / se.vec
+  output.est[, 6] <- apply(cbind(pnorm(output.est[, 5]), 1 - pnorm(output.est[, 5])), MARGIN = 1, FUN = min) * 2
+  output.est[, 7] <- stars.pval(output.est[, 6])
 
-  x = list(output.est = output.est)
-  class(x) = "summary.CATE"
+  x <- list(output.est = output.est)
+  class(x) <- "summary.CATE"
   x
 }
 
@@ -205,11 +207,11 @@ summary.CATE = function(object, ...){
 #' #' ##-- Continuing the CATE(.) example:
 #' summary(Est)
 #' }
-print.summary.CATE = function(x, digits = max(3, getOption("digits") - 3), ...){
-  output.est = x$output.est
+print.summary.CATE <- function(x, digits = max(3, getOption("digits") - 3), ...) {
+  output.est <- x$output.est
   cat("Call: \nInference for Treatment Effect\n\n")
   cat("Estimators: \n")
-  print(output.est, digits=digits, quote=F, row.names=F)
+  print(output.est, digits = digits, quote = F, row.names = F)
   invisible(x)
 }
 
@@ -230,30 +232,30 @@ print.summary.CATE = function(x, digits = max(3, getOption("digits") - 3), ...){
 #' @export
 #' @examples
 #' \dontrun{
-#' ##-- Continuing the QF(.) example:
-#' out = ci(Est)
+#' ## -- Continuing the QF(.) example:
+#' out <- ci(Est)
 #' out
 #' }
-ci.QF = function(object, probability=FALSE, alpha=0.05, alternative=c("two.sided","less","greater"), ...){
-  if(probability==TRUE){
+ci.QF <- function(object, probability = FALSE, alpha = 0.05, alternative = c("two.sided", "less", "greater"), ...) {
+  if (probability == TRUE) {
     cat("QF only supports probability=FALSE \n")
-    probability=FALSE
+    probability <- FALSE
   }
 
-  alternative = match.arg(alternative)
-  est.debias = object$est.debias
-  se     = object$se
-  tau    = object$tau
-  n.tau = length(tau)
-  if(alternative=="two.sided"){
-    output.ci = cbind(pmax(est.debias - qnorm(1-alpha/2)*se,0), pmax(est.debias + qnorm(1-alpha/2)*se,0))
-  }else if(alternative=="less"){
-    output.ci = cbind(0, pmax(est.debias + qnorm(1-alpha)*se,0))
-  }else if(alternative=="greater"){
-    output.ci = cbind(pmax(est.debias - qnorm(1-alpha)*se,0), Inf)
+  alternative <- match.arg(alternative)
+  est.debias <- object$est.debias
+  se <- object$se
+  tau <- object$tau
+  n.tau <- length(tau)
+  if (alternative == "two.sided") {
+    output.ci <- cbind(pmax(est.debias - qnorm(1 - alpha / 2) * se, 0), pmax(est.debias + qnorm(1 - alpha / 2) * se, 0))
+  } else if (alternative == "less") {
+    output.ci <- cbind(0, pmax(est.debias + qnorm(1 - alpha) * se, 0))
+  } else if (alternative == "greater") {
+    output.ci <- cbind(pmax(est.debias - qnorm(1 - alpha) * se, 0), Inf)
   }
-  output.ci = data.frame(cbind(tau, output.ci))
-  colnames(output.ci) = c("tau","lower","upper")
+  output.ci <- data.frame(cbind(tau, output.ci))
+  colnames(output.ci) <- c("tau", "lower", "upper")
   return(output.ci)
 }
 
@@ -269,27 +271,27 @@ ci.QF = function(object, probability=FALSE, alpha=0.05, alternative=c("two.sided
 #' @export
 #' @examples
 #' \dontrun{
-#' ##-- Continuing the QF(.) example:
-#' sEst = summary(Est)
+#' ## -- Continuing the QF(.) example:
+#' sEst <- summary(Est)
 #' sEst
 #' }
-summary.QF = function(object, ...){
-  est.plugin = object$est.plugin
-  est.debias = object$est.debias
-  se = object$se
-  tau = object$tau
+summary.QF <- function(object, ...) {
+  est.plugin <- object$est.plugin
+  est.debias <- object$est.debias
+  se <- object$se
+  tau <- object$tau
 
-  n.tau = length(tau)
-  output.est = data.frame(matrix(NA, nrow=n.tau, ncol=7))
-  colnames(output.est) = c("tau","est.plugin","est.debias","Std. Error","z value","Pr(>|z|)", "")
-  output.est[,1] = tau
-  output.est[,c(2,3,4)] = cbind(rep(est.plugin, n.tau), rep(est.debias, n.tau), se)
-  output.est[,5] = rep(est.debias, n.tau) / se
-  output.est[,6] = apply(cbind(pnorm(output.est[,5]), 1-pnorm(output.est[,5])), MARGIN = 1, FUN=min)*2
-  output.est[,7] = stars.pval(output.est[,6])
+  n.tau <- length(tau)
+  output.est <- data.frame(matrix(NA, nrow = n.tau, ncol = 7))
+  colnames(output.est) <- c("tau", "est.plugin", "est.debias", "Std. Error", "z value", "Pr(>|z|)", "")
+  output.est[, 1] <- tau
+  output.est[, c(2, 3, 4)] <- cbind(rep(est.plugin, n.tau), rep(est.debias, n.tau), se)
+  output.est[, 5] <- rep(est.debias, n.tau) / se
+  output.est[, 6] <- apply(cbind(pnorm(output.est[, 5]), 1 - pnorm(output.est[, 5])), MARGIN = 1, FUN = min) * 2
+  output.est[, 7] <- stars.pval(output.est[, 6])
 
-  x = list(output.est = output.est)
-  class(x) = "summary.QF"
+  x <- list(output.est = output.est)
+  class(x) <- "summary.QF"
   x
 }
 
@@ -305,11 +307,11 @@ summary.QF = function(object, ...){
 #' #' ##-- Continuing the QF(.) example:
 #' summary(Est)
 #' }
-print.summary.QF = function(x, digits = max(3, getOption("digits") - 3), ...){
-  output.est = x$output.est
+print.summary.QF <- function(x, digits = max(3, getOption("digits") - 3), ...) {
+  output.est <- x$output.est
 
   cat("Call: \nInference for Quadratic Functional\n\n")
-  print(output.est, digits=digits, quote=F, row.names=F)
+  print(output.est, digits = digits, quote = F, row.names = F)
   invisible(x)
 }
 
@@ -328,30 +330,30 @@ print.summary.QF = function(x, digits = max(3, getOption("digits") - 3), ...){
 #' @export
 #' @examples
 #' \dontrun{
-#' ##-- Continuing the InnProd(.) example:
-#' out = ci(Est)
+#' ## -- Continuing the InnProd(.) example:
+#' out <- ci(Est)
 #' out
 #' }
-ci.InnProd = function(object, probability=FALSE, alpha=0.05, alternative=c("two.sided","less","greater"), ...){
-  if(probability==TRUE){
+ci.InnProd <- function(object, probability = FALSE, alpha = 0.05, alternative = c("two.sided", "less", "greater"), ...) {
+  if (probability == TRUE) {
     cat("InnProd only supports probability=FALSE \n")
-    probability=FALSE
+    probability <- FALSE
   }
 
-  alternative = match.arg(alternative)
-  est.debias = object$est.debias
-  se     = object$se
-  tau    = object$tau
-  n.tau = length(tau)
-  if(alternative=="two.sided"){
-    output.ci = cbind(est.debias - qnorm(1-alpha/2)*se, est.debias + qnorm(1-alpha/2)*se)
-  }else if(alternative=="less"){
-    output.ci = cbind(-Inf, est.debias + qnorm(1-alpha)*se)
-  }else if(alternative=="greater"){
-    output.ci = cbind(est.debias - qnorm(1-alpha)*se, Inf)
+  alternative <- match.arg(alternative)
+  est.debias <- object$est.debias
+  se <- object$se
+  tau <- object$tau
+  n.tau <- length(tau)
+  if (alternative == "two.sided") {
+    output.ci <- cbind(est.debias - qnorm(1 - alpha / 2) * se, est.debias + qnorm(1 - alpha / 2) * se)
+  } else if (alternative == "less") {
+    output.ci <- cbind(-Inf, est.debias + qnorm(1 - alpha) * se)
+  } else if (alternative == "greater") {
+    output.ci <- cbind(est.debias - qnorm(1 - alpha) * se, Inf)
   }
-  output.ci = data.frame(cbind(tau, output.ci))
-  colnames(output.ci) = c("tau","lower","upper")
+  output.ci <- data.frame(cbind(tau, output.ci))
+  colnames(output.ci) <- c("tau", "lower", "upper")
   return(output.ci)
 }
 
@@ -366,27 +368,27 @@ ci.InnProd = function(object, probability=FALSE, alpha=0.05, alternative=c("two.
 #' @export
 #' @examples
 #' \dontrun{
-#' ##-- Continuing the InnProd(.) example:
-#' sEst = summary(Est)
+#' ## -- Continuing the InnProd(.) example:
+#' sEst <- summary(Est)
 #' sEst
 #' }
-summary.InnProd = function(object, ...){
-  est.plugin = object$est.plugin
-  est.debias = object$est.debias
-  se = object$se
-  tau = object$tau
+summary.InnProd <- function(object, ...) {
+  est.plugin <- object$est.plugin
+  est.debias <- object$est.debias
+  se <- object$se
+  tau <- object$tau
 
-  n.tau = length(tau)
-  output.est = data.frame(matrix(NA, nrow=n.tau, ncol=7))
-  colnames(output.est) = c("tau","est.plugin","est.debias","Std. Error","z value","Pr(>|z|)", "")
-  output.est[,1] = tau
-  output.est[,c(2,3,4)] = cbind(rep(est.plugin, n.tau), rep(est.debias, n.tau), se)
-  output.est[,5] = rep(est.debias, n.tau) / se
-  output.est[,6] = apply(cbind(pnorm(output.est[,5]), 1-pnorm(output.est[,5])), MARGIN = 1, FUN=min)*2
-  output.est[,7] = stars.pval(output.est[,6])
+  n.tau <- length(tau)
+  output.est <- data.frame(matrix(NA, nrow = n.tau, ncol = 7))
+  colnames(output.est) <- c("tau", "est.plugin", "est.debias", "Std. Error", "z value", "Pr(>|z|)", "")
+  output.est[, 1] <- tau
+  output.est[, c(2, 3, 4)] <- cbind(rep(est.plugin, n.tau), rep(est.debias, n.tau), se)
+  output.est[, 5] <- rep(est.debias, n.tau) / se
+  output.est[, 6] <- apply(cbind(pnorm(output.est[, 5]), 1 - pnorm(output.est[, 5])), MARGIN = 1, FUN = min) * 2
+  output.est[, 7] <- stars.pval(output.est[, 6])
 
-  x = list(output.est = output.est)
-  class(x) = "summary.InnProd"
+  x <- list(output.est = output.est)
+  class(x) <- "summary.InnProd"
   x
 }
 
@@ -402,11 +404,11 @@ summary.InnProd = function(object, ...){
 #' #' ##-- Continuing the InnProd(.) example:
 #' summary(Est)
 #' }
-print.summary.InnProd = function(x, digits = max(3, getOption("digits") - 3), ...){
-  output.est = x$output.est
+print.summary.InnProd <- function(x, digits = max(3, getOption("digits") - 3), ...) {
+  output.est <- x$output.est
 
   cat("Call: \nInference for Inner Product\n\n")
-  print(output.est, digits=digits, quote=F, row.names=F)
+  print(output.est, digits = digits, quote = F, row.names = F)
   invisible(x)
 }
 
@@ -425,30 +427,30 @@ print.summary.InnProd = function(x, digits = max(3, getOption("digits") - 3), ..
 #' @export
 #' @examples
 #' \dontrun{
-#' ##-- Continuing the Dist(.) example:
-#' out = ci(Est)
+#' ## -- Continuing the Dist(.) example:
+#' out <- ci(Est)
 #' out
 #' }
-ci.Dist = function(object, probability=FALSE, alpha=0.05, alternative=c("two.sided","less","greater"), ...){
-  if(probability==TRUE){
+ci.Dist <- function(object, probability = FALSE, alpha = 0.05, alternative = c("two.sided", "less", "greater"), ...) {
+  if (probability == TRUE) {
     cat("QF only supports probability=FALSE \n")
-    probability=FALSE
+    probability <- FALSE
   }
 
-  alternative = match.arg(alternative)
-  est.debias = object$est.debias
-  se     = object$se
-  tau    = object$tau
-  n.tau = length(tau)
-  if(alternative=="two.sided"){
-    output.ci = cbind(pmax(est.debias - qnorm(1-alpha/2)*se,0), pmax(est.debias + qnorm(1-alpha/2)*se,0))
-  }else if(alternative=="less"){
-    output.ci = cbind(0, pmax(est.debias + qnorm(1-alpha)*se,0))
-  }else if(alternative=="greater"){
-    output.ci = cbind(pmax(est.debias - qnorm(1-alpha)*se,0), Inf)
+  alternative <- match.arg(alternative)
+  est.debias <- object$est.debias
+  se <- object$se
+  tau <- object$tau
+  n.tau <- length(tau)
+  if (alternative == "two.sided") {
+    output.ci <- cbind(pmax(est.debias - qnorm(1 - alpha / 2) * se, 0), pmax(est.debias + qnorm(1 - alpha / 2) * se, 0))
+  } else if (alternative == "less") {
+    output.ci <- cbind(0, pmax(est.debias + qnorm(1 - alpha) * se, 0))
+  } else if (alternative == "greater") {
+    output.ci <- cbind(pmax(est.debias - qnorm(1 - alpha) * se, 0), Inf)
   }
-  output.ci = data.frame(cbind(tau, output.ci))
-  colnames(output.ci) = c("tau","lower","upper")
+  output.ci <- data.frame(cbind(tau, output.ci))
+  colnames(output.ci) <- c("tau", "lower", "upper")
   return(output.ci)
 }
 
@@ -463,27 +465,27 @@ ci.Dist = function(object, probability=FALSE, alpha=0.05, alternative=c("two.sid
 #' @export
 #' @examples
 #' \dontrun{
-#' ##-- Continuing the Dist(.) example:
-#' sEst = summary(Est)
+#' ## -- Continuing the Dist(.) example:
+#' sEst <- summary(Est)
 #' sEst
 #' }
-summary.Dist = function(object, ...){
-  est.plugin = object$est.plugin
-  est.debias = object$est.debias
-  se = object$se
-  tau = object$tau
+summary.Dist <- function(object, ...) {
+  est.plugin <- object$est.plugin
+  est.debias <- object$est.debias
+  se <- object$se
+  tau <- object$tau
 
-  n.tau = length(tau)
-  output.est = data.frame(matrix(NA, nrow=n.tau, ncol=7))
-  colnames(output.est) = c("tau","est.plugin","est.debias","Std. Error","z value","Pr(>|z|)", "")
-  output.est[,1] = tau
-  output.est[,c(2,3,4)] = cbind(rep(est.plugin, n.tau), rep(est.debias, n.tau), se)
-  output.est[,5] = rep(est.debias, n.tau) / se
-  output.est[,6] = apply(cbind(pnorm(output.est[,5]), 1-pnorm(output.est[,5])), MARGIN = 1, FUN=min)*2
-  output.est[,7] = stars.pval(output.est[,6])
+  n.tau <- length(tau)
+  output.est <- data.frame(matrix(NA, nrow = n.tau, ncol = 7))
+  colnames(output.est) <- c("tau", "est.plugin", "est.debias", "Std. Error", "z value", "Pr(>|z|)", "")
+  output.est[, 1] <- tau
+  output.est[, c(2, 3, 4)] <- cbind(rep(est.plugin, n.tau), rep(est.debias, n.tau), se)
+  output.est[, 5] <- rep(est.debias, n.tau) / se
+  output.est[, 6] <- apply(cbind(pnorm(output.est[, 5]), 1 - pnorm(output.est[, 5])), MARGIN = 1, FUN = min) * 2
+  output.est[, 7] <- stars.pval(output.est[, 6])
 
-  x = list(output.est = output.est)
-  class(x) = "summary.Dist"
+  x <- list(output.est = output.est)
+  class(x) <- "summary.Dist"
   x
 }
 
@@ -499,10 +501,10 @@ summary.Dist = function(object, ...){
 #' #' ##-- Continuing the Dist(.) example:
 #' summary(Est)
 #' }
-print.summary.Dist = function(x, digits = max(3, getOption("digits") - 3), ...){
-  output.est = x$output.est
+print.summary.Dist <- function(x, digits = max(3, getOption("digits") - 3), ...) {
+  output.est <- x$output.est
 
   cat("Call: \nInference for Distance\n\n")
-  print(output.est, digits=digits, quote=F, row.names=F)
+  print(output.est, digits = digits, quote = F, row.names = F)
   invisible(x)
 }

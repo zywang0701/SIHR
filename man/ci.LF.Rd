@@ -33,8 +33,8 @@ row corresponds to a loading.
 }
 \examples{
 \dontrun{
-##-- Continuing the LF(.) example:
-out = ci(Est)
+## -- Continuing the LF(.) example:
+out <- ci(Est)
 out
 }
 }

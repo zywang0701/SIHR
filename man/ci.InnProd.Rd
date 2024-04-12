@@ -30,8 +30,8 @@ Computes confidence intervals for bias-corrected estimator
 }
 \examples{
 \dontrun{
-##-- Continuing the InnProd(.) example:
-out = ci(Est)
+## -- Continuing the InnProd(.) example:
+out <- ci(Est)
 out
 }
 }

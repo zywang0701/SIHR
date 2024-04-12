@@ -78,12 +78,12 @@ form of the regression vector; row corresponds to different values of
 Inference for weighted inner product of the regression vectors in high dimensional generalized linear regressions
 }
 \examples{
-X1 = matrix(rnorm(100*5), nrow=100, ncol=5)
-y1 = -0.5 + X1[,1] * 0.5 + X1[,2] * 1 + rnorm(100)
-X2 = matrix(rnorm(90*5), nrow=90, ncol=5)
-y2 = -0.4 + X2[,1] * 0.48 + X2[,2] * 1.1 + rnorm(90)
-G = c(1,2)
-A = matrix(c(1.5, 0.8, 0.8, 1.5), nrow=2, ncol=2)
-Est = InnProd(X1, y1, X2, y2, G, A, model="linear")
+X1 <- matrix(rnorm(100 * 5), nrow = 100, ncol = 5)
+y1 <- -0.5 + X1[, 1] * 0.5 + X1[, 2] * 1 + rnorm(100)
+X2 <- matrix(rnorm(90 * 5), nrow = 90, ncol = 5)
+y2 <- -0.4 + X2[, 1] * 0.48 + X2[, 2] * 1.1 + rnorm(90)
+G <- c(1, 2)
+A <- matrix(c(1.5, 0.8, 0.8, 1.5), nrow = 2, ncol = 2)
+Est <- InnProd(X1, y1, X2, y2, G, A, model = "linear")
 Est$ci
 }

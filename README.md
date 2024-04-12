@@ -20,7 +20,12 @@ debiasing methods, addressing a broad spectrum of inference challenges
 in high-dimensional GLMs, applicable to both continuous and binary
 outcomes.
 
-To demonstrate the effect of bias correction, we conducted 250 simulation rounds. The data generation process is defined with $n=p=200$: for $1\leq i\leq n$, the covariates follows $X_i\sim \mathcal{N}({0}_p, \mathbf{I}_p)$, the outcome follows$Y_i = X_i^\intercal \beta + \mathcal{N}(0,1)$, where $\beta= (0.5_{5}, 0.2, 0.4, 0.6, 0.8, 1, {0}_{p-10})$.
+To demonstrate the effect of bias correction, we conducted 250 simulation 
+rounds. The data generation process is defined with $n=p=200$: 
+for $1\leq i\leq n$, the covariates follows 
+$X_i\sim \mathcal{N}({0}_p, \mathbf{I}_p)$, 
+the outcome follows $Y_i = X_i^\intercal \beta + \mathcal{N}(0,1)$, 
+where $\beta= (0.5_{5}, 0.2, 0.4, 0.6, 0.8, 1, {0}_{p-10})$.
 
 Our objective was to conduct inference on the first coefficient
 $e_1^\intercal \beta = 0.5$. However, as illustrated in the left
@@ -65,6 +70,9 @@ Outline of SIHR
 
 We have prepared several vignettes to help users get ready with **SIHR**:
 
-* Begin with the [Get Started](https://zywang0701.github.io/SIHR/articles/SIHR.html) guide for an initial usage of the package.
-* For an in-depth exploration of the package's functionality, consult the [Intro of Usage](https://zywang0701.github.io/SIHR/articles/IntroUsage.pdf).
-* To gain insights into the debiasing methods incorporated within the package, refer to our [Intro of Debiasing Methods](https://zywang0701.github.io/SIHR/articles/IntroMethod.pdf).
+* Begin with the [Get Started](https://zywang0701.github.io/SIHR/articles/SIHR.html) 
+guide for an initial usage of the package.
+* For an in-depth exploration of the package's functionality, 
+consult the [Intro of Usage](https://zywang0701.github.io/SIHR/articles/IntroUsage.pdf).
+* To gain insights into the debiasing methods incorporated within the package, 
+refer to our [Intro of Debiasing Methods](https://zywang0701.github.io/SIHR/articles/IntroMethod.pdf).

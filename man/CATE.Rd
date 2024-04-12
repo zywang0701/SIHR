@@ -103,17 +103,17 @@ Computes the bias-corrected estimator of the difference of
   generalized linear regressions and the corresponding standard error.
 }
 \examples{
-X1 = matrix(rnorm(100*5), nrow=100, ncol=5)
-y1 = -0.5 + X1[,1] * 0.5 + X1[,2] * 1 + rnorm(100)
-X2 = matrix(rnorm(90*5), nrow=90, ncol=5)
-y2 = -0.4 + X2[,1] * 0.48 + X2[,2] * 1.1 + rnorm(90)
-loading1 = c(1, 1, rep(0,3))
-loading2 = c(-0.5, -1, rep(0,3))
-loading.mat = cbind(loading1, loading2)
-Est = CATE(X1, y1, X2, y2, loading.mat, model="linear")
+X1 <- matrix(rnorm(100 * 5), nrow = 100, ncol = 5)
+y1 <- -0.5 + X1[, 1] * 0.5 + X1[, 2] * 1 + rnorm(100)
+X2 <- matrix(rnorm(90 * 5), nrow = 90, ncol = 5)
+y2 <- -0.4 + X2[, 1] * 0.48 + X2[, 2] * 1.1 + rnorm(90)
+loading1 <- c(1, 1, rep(0, 3))
+loading2 <- c(-0.5, -1, rep(0, 3))
+loading.mat <- cbind(loading1, loading2)
+Est <- CATE(X1, y1, X2, y2, loading.mat, model = "linear")
 
 ## compute confidence intervals
-ci(Est, alpha=0.05, alternative="two.sided")
+ci(Est, alpha = 0.05, alternative = "two.sided")
 
 ## summary statistics
 summary(Est)

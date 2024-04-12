@@ -33,8 +33,8 @@ row corresponds to a tau value.
 }
 \examples{
 \dontrun{
-##-- Continuing the QF(.) example:
-out = ci(Est)
+## -- Continuing the QF(.) example:
+out <- ci(Est)
 out
 }
 }

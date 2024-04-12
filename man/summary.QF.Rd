@@ -22,8 +22,8 @@ corresponding (two-sided) p-value and significance stars; Each row corresponds t
 }
 \examples{
 \dontrun{
-##-- Continuing the QF(.) example:
-sEst = summary(Est)
+## -- Continuing the QF(.) example:
+sEst <- summary(Est)
 sEst
 }
 }

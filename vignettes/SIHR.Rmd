@@ -40,22 +40,23 @@ The 1st and 2nd objectives will be achieved togther by *LF( )*, while the 3d obj
 Generate Data
 ```{r}
 set.seed(0)
-n = 200; p = 150
-X = matrix(rnorm(n*p), nrow=n, ncol=p)
-y = -0.5 + X%*%c(0.5, rep(1,4), rep(0, p-5))
+n <- 200
+p <- 150
+X <- matrix(rnorm(n * p), nrow = n, ncol = p)
+y <- -0.5 + X %*% c(0.5, rep(1, 4), rep(0, p - 5))
 ```
 
 ### LF: Linear Functionals 
 Loadings for Linear Functionals
 ```{r}
-loading1 = c(1, rep(0, p-1)) # for 1st objective, true value = 0.5
-loading2 = c(1, 1, rep(0, p-2)) # for 2nd objective, true value = 1.5
-loading.mat = cbind(loading1, loading2)
+loading1 <- c(1, rep(0, p - 1)) # for 1st objective, true value = 0.5
+loading2 <- c(1, 1, rep(0, p - 2)) # for 2nd objective, true value = 1.5
+loading.mat <- cbind(loading1, loading2)
 ```
 
 Conduct Inference, call `LF` with `model="linear"`:
 ```{r}
-Est = LF(X, y, loading.mat, model="linear", intercept=TRUE, intercept.loading=FALSE, verbose=TRUE)
+Est <- LF(X, y, loading.mat, model = "linear", intercept = TRUE, intercept.loading = FALSE, verbose = TRUE)
 ```
 The parameter `intercept` indicates whether we fit the model with/without intercept term. The parameter `intercept.loading` indicates whether we include intercept term in the inference objective. In this example, the model is fitted with intercept, but we do not include it in our final objective.
 
@@ -70,11 +71,11 @@ Notice that the true values are $0.5$ and $1.5$ for 1st and 2nd objective respec
 ### QF: Quadratic Functionals
 For quadratic functionals, we need to specify the subset $G \subseteq [p]$. If argument $A$ is not specified (default = NULL), we will automatically conduct inference on $\beta_G \Sigma_{G,G} \beta_G$.
 ```{r}
-G = c(1:4) # 3rd objective, true value = 3.25
+G <- c(1:4) # 3rd objective, true value = 3.25
 ```
 Conduct Inference, call `QF` with `model="linear"`. The argument `split` indicates whether we split samples or not for computing the initial estimator.
 ```{r}
-Est = QF(X, y, G, A=NULL, model="linear", intercept=TRUE, verbose=TRUE)
+Est <- QF(X, y, G, A = NULL, model = "linear", intercept = TRUE, verbose = TRUE)
 ```
 
 `ci` method for QF
@@ -107,24 +108,25 @@ The 1st and 2nd objectives will be achieved togther by *LF( )*, while the 3d obj
 Generate Data
 ```{r}
 set.seed(1)
-n = 200; p = 120
-X = matrix(rnorm(n*p), nrow=n, ncol=p)
-val = -1.5 + X[,1]*0.5 + X[,2]*1
-prob = exp(val)/(1+exp(val))
-y = rbinom(n, 1, prob)
+n <- 200
+p <- 120
+X <- matrix(rnorm(n * p), nrow = n, ncol = p)
+val <- -1.5 + X[, 1] * 0.5 + X[, 2] * 1
+prob <- exp(val) / (1 + exp(val))
+y <- rbinom(n, 1, prob)
 ```
 
 ### LF: Linear Functionals 
 Loadings for Linear Functionals
 ```{r}
-loading1 = c(1, 1, rep(0, p-2)) # for 1st objective, true value = 1.5
-loading2 = c(-0.5, -1, rep(0, p-2)) # for 2nd objective, true value = -1.25
-loading.mat = cbind(loading1, loading2)
+loading1 <- c(1, 1, rep(0, p - 2)) # for 1st objective, true value = 1.5
+loading2 <- c(-0.5, -1, rep(0, p - 2)) # for 2nd objective, true value = -1.25
+loading.mat <- cbind(loading1, loading2)
 ```
 
 Conduct Inference, call `LF` with `model="logistic"` or `model="logistic_alter"`:
 ```{r}
-Est = LF(X, y, loading.mat, model="logistic", verbose=TRUE)
+Est <- LF(X, y, loading.mat, model = "logistic", verbose = TRUE)
 ```
 
 Methods for `LF`
@@ -139,16 +141,17 @@ Notice that the true values are $1.5$ and $-1.25$ for 1st and 2nd objective resp
 For quadratic functionals, we find that sufficient larger sample size is needed for better empirical result, since we need to split samples to obtain initial estimators. Thus, we generate another simulated data but with larger sample size $n=400$.
 ```{r}
 set.seed(0)
-n = 400; p = 120
-X = matrix(rnorm(n*p), nrow=n, ncol=p)
-val = -1.5 + X[,1]*0.5 + X[,2]*1
-prob = exp(val)/(1+exp(val))
-y = rbinom(n, 1, prob)
-G = c(1:3) # 3rd objective, true value = 1.25
+n <- 400
+p <- 120
+X <- matrix(rnorm(n * p), nrow = n, ncol = p)
+val <- -1.5 + X[, 1] * 0.5 + X[, 2] * 1
+prob <- exp(val) / (1 + exp(val))
+y <- rbinom(n, 1, prob)
+G <- c(1:3) # 3rd objective, true value = 1.25
 ```
 Conduct Inference, call `QF` with `model="logistic_alter"`.
 ```{r}
-Est = QF(X, y, G, A=NULL, model="logistic_alter", intercept=TRUE, verbose=TRUE)
+Est <- QF(X, y, G, A = NULL, model = "logistic_alter", intercept = TRUE, verbose = TRUE)
 ```
 
 `ci` method for QF

@@ -30,8 +30,8 @@ Computes confidence intervals for bias-corrected estimator
 }
 \examples{
 \dontrun{
-##-- Continuing the Dist(.) example:
-out = ci(Est)
+## -- Continuing the Dist(.) example:
+out <- ci(Est)
 out
 }
 }

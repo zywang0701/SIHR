@@ -21,8 +21,8 @@ corresponding (two-sided) p-value and significance stars}
 }
 \examples{
 \dontrun{
-##-- Continuing the Dist(.) example:
-sEst = summary(Est)
+## -- Continuing the Dist(.) example:
+sEst <- summary(Est)
 sEst
 }
 }

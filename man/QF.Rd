@@ -85,13 +85,13 @@ Inference for quadratic forms of the regression vector in high dimensional
 generalized linear regressions
 }
 \examples{
-X = matrix(rnorm(100*5), nrow=100, ncol=5)
-y = X[,1] * 0.5 + X[,2] * 1 + rnorm(100)
-G = c(1,2)
-A = matrix(c(1.5, 0.8, 0.8, 1.5), nrow=2, ncol=2)
-Est = QF(X, y, G, A, model="linear")
+X <- matrix(rnorm(100 * 5), nrow = 100, ncol = 5)
+y <- X[, 1] * 0.5 + X[, 2] * 1 + rnorm(100)
+G <- c(1, 2)
+A <- matrix(c(1.5, 0.8, 0.8, 1.5), nrow = 2, ncol = 2)
+Est <- QF(X, y, G, A, model = "linear")
 ## compute confidence intervals
-ci(Est, alpha=0.05, alternative="two.sided")
+ci(Est, alpha = 0.05, alternative = "two.sided")
 
 ## summary statistics
 summary(Est)

@@ -33,8 +33,8 @@ row corresponds to a loading.
 }
 \examples{
 \dontrun{
-##-- Continuing the CATE(.) example:
-out = ci(Est)
+## -- Continuing the CATE(.) example:
+out <- ci(Est)
 out
 }
 }
