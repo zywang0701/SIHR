@@ -120,7 +120,7 @@
 <h2 id="background">Background<a class="anchor" aria-label="anchor" href="#background"></a>
 </h2>
 <p>In numerous scenarios, regression problems often involve a number of dimensions <span class="math inline"><em>p</em></span> surpassing the sample size <span class="math inline"><em>n</em></span>. Traditional estimators, derived through penalized maximum likelihood methods like Lasso and Ridge, are unsuitable for statistical inference due to significant estimation bias introduced by the penalty term. Our package leverages debiasing methods, addressing a broad spectrum of inference challenges in high-dimensional GLMs, applicable to both continuous and binary outcomes.</p>
-<p>To demonstrate the effect of bias correction, we conducted 250 simulation rounds. The data generation process is defined with <span class="math inline"><em>n</em> = <em>p</em> = 200</span>: for <span class="math inline">1 ≤ <em>i</em> ≤ <em>n</em></span>, the covariates follows <span class="math inline"><em>X</em><sub><em>i</em></sub> ∼ 𝒩(0<sub><em>p</em></sub>,<strong>I</strong><sub><em>p</em></sub>)</span>, the outcome follows<span class="math inline"><em>Y</em><sub><em>i</em></sub> = <em>X</em><sub><em>i</em></sub><sup>⊺</sup><em>β</em> + 𝒩(0,1)</span>, where <span class="math inline"><em>β</em> = (0.5<sub>5</sub>,0.2,0.4,0.6,0.8,1,0<sub><em>p</em> − 10</sub>)</span>.</p>
+<p>To demonstrate the effect of bias correction, we conducted 250 simulation rounds. The data generation process is defined with <span class="math inline"><em>n</em> = <em>p</em> = 200</span>: for <span class="math inline">1 ≤ <em>i</em> ≤ <em>n</em></span>, the covariates follows <span class="math inline"><em>X</em><sub><em>i</em></sub> ∼ 𝒩(0<sub><em>p</em></sub>,<strong>I</strong><sub><em>p</em></sub>)</span>, the outcome follows <span class="math inline"><em>Y</em><sub><em>i</em></sub> = <em>X</em><sub><em>i</em></sub><sup>⊺</sup><em>β</em> + 𝒩(0,1)</span>, where <span class="math inline"><em>β</em> = (0.5<sub>5</sub>,0.2,0.4,0.6,0.8,1,0<sub><em>p</em> − 10</sub>)</span>.</p>
 <p>Our objective was to conduct inference on the first coefficient <span class="math inline"><em>e</em><sub>1</sub><sup>⊺</sup><em>β</em> = 0.5</span>. However, as illustrated in the left subfigure, Lasso estimators from the <strong>glmnet</strong> package exhibit considerable bias. Conversely, our <strong>SIHR</strong> estimators, shown in the right subfigure, are unbiased and thus ready for valid statistical inference.</p>
 <div class="figure" style="text-align: center" align="center">
 <img src="./reference/figures/SIHR-bias.png" alt="Illustration of Bias Correction" width="80%"><p class="caption">
@@ -147,9 +147,9 @@ Outline of SIHR
 </div>
 <p>We have prepared several vignettes to help users get ready with <strong>SIHR</strong>:</p>
 <ul>
-<li>Begin with the <a href="./articles/SIHR.html">Get Started</a> guide for an initial usage of the package.</li>
-<li>For an in-depth exploration of the package’s functionality, consult the <a href="./articles/IntroUsage.pdf">Intro of Usage</a>.</li>
-<li>To gain insights into the debiasing methods incorporated within the package, refer to our <a href="./articles/IntroMethod.pdf">Intro of Debiasing Methods</a>.</li>
+<li>Begin with the <a href="https://zywang0701.github.io/SIHR/articles/SIHR.html" class="external-link">Get Started</a> guide for an initial usage of the package.</li>
+<li>For an in-depth exploration of the package’s functionality, consult the <a href="https://zywang0701.github.io/SIHR/articles/IntroUsage.pdf" class="external-link">Intro of Usage</a>.</li>
+<li>To gain insights into the debiasing methods incorporated within the package, refer to our <a href="https://zywang0701.github.io/SIHR/articles/IntroMethod.pdf" class="external-link">Intro of Debiasing Methods</a>.</li>
 </ul>
 </div>
 </div>
