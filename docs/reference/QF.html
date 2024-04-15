@@ -219,20 +219,20 @@ form of the regression vector; row corresponds to different values of
 <span class="r-in"><span><span class="va">Est</span> <span class="op">&lt;-</span> <span class="fu">QF</span><span class="op">(</span><span class="va">X</span>, <span class="va">y</span>, <span class="va">G</span>, <span class="va">A</span>, model <span class="op">=</span> <span class="st">"linear"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co">## compute confidence intervals</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="ci.html">ci</a></span><span class="op">(</span><span class="va">Est</span>, alpha <span class="op">=</span> <span class="fl">0.05</span>, alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    tau     lower    upper</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 0.25 0.9962457 4.170488</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 0.50 0.9902062 4.176528</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 1.00 0.9781954 4.188539</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    tau    lower    upper</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 0.25 1.172072 3.483800</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 0.50 1.163793 3.492079</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 1.00 1.147409 3.508463</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## summary statistics</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">Est</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Call: </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Inference for Quadratic Functional</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   tau est.plugin est.debias Std. Error z value Pr(&gt;|z|)   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.25      2.448      2.583     0.8098   3.190 0.001422 **</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.50      2.448      2.583     0.8129   3.178 0.001482 **</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1.00      2.448      2.583     0.8190   3.154 0.001608 **</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   tau est.plugin est.debias Std. Error z value  Pr(&gt;|z|)    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.25      1.619      2.328     0.5897   3.947 7.900e-05 ***</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.50      1.619      2.328     0.5940   3.919 8.879e-05 ***</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1.00      1.619      2.328     0.6023   3.865 1.111e-04 ***</span>
 </code></pre></div>
     </div>
   </div>
@@ -243,7 +243,7 @@ form of the regression vector; row corresponds to different values of
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Zhenyu Wang, Prabrisha Rakshit, Tony Cai, Zijian Guo.</p>
+  <p></p><p>Developed by <a href="https://zywang0701.github.io" class="external-link">Zhenyu Wang</a>, Prabrisha Rakshit, <a href="http://www-stat.wharton.upenn.edu/~tcai/" class="external-link">Tony Cai</a>, <a href="https://statweb.rutgers.edu/zijguo/" class="external-link">Zijian Guo</a>.</p>
 </div>
 
 <div class="pkgdown">

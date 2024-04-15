@@ -7,6 +7,14 @@ template:
       src: https://example.com/tracker.js
     toggle: manual
 
+authors:
+  Zhenyu Wang:
+    href: https://zywang0701.github.io
+  Tony Cai:
+    href: http://www-stat.wharton.upenn.edu/~tcai/
+  Zijian Guo:
+    href: https://statweb.rutgers.edu/zijguo/
+
 navbar:
   structure:
     left:  [intro, reference, articles, tutorials, news]
