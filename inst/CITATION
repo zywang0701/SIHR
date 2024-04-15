@@ -1,0 +1,10 @@
+citHeader("Please cite the following when using the 'SIHR' software package.")
+
+bibentry(bibtype = "Manual",
+         title = "SIHR: Statistical Inference in High-Dimensional Linear and Logistic Regression Models",
+         author = c(person("Prabrisha", "Rakshit"),
+                    person("Zhenyu", "Wang"),
+                    person("Tony", "Cai"),
+                    person("Zijian", "Guo")),
+         year = "2021",
+         url = "https://arxiv.org/abs/2109.03365")
