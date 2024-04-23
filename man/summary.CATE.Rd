@@ -12,7 +12,8 @@
 \item{...}{arguments to pass down}
 }
 \value{
-The function `summary.CATE` computes and returns a list of summary statistics.
+The function `summary.CATE` computes and returns a list of summary
+  statistics.
 \item{output.est}{a \eqn{ncol(loading.mat)} x 7 matrix with columns for the loading,
 plugin(biased) estimators, bias-corrected estimators, its standard error, z-statistic,
 corresponding (two-sided) p-value and significance stars; Each row corresponds to each loading.}

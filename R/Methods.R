@@ -1,9 +1,13 @@
 #' Confidence Intervals for Bias-corrected Estimators
 #' @description generic function
 #' @param object An object of class
-#' @param probability Whether returns CI with probability transformation or not (default=\code{FALSE})
-#' @param alpha Level of significance to construct confidence interval (default=0.05)
-#' @param alternative Indicates the alternative hypothesis to construct confidence interval and must be one of "two.sided" (default), "less", or "greater".
+#' @param probability Whether returns CI with probability transformation or not
+#'   (default=\code{FALSE})
+#' @param alpha Level of significance to construct confidence interval
+#'   (default=0.05)
+#' @param alternative Indicates the alternative hypothesis to construct
+#'   confidence interval and must be one of "two.sided" (default), "less", or
+#'   "greater".
 #' @param ... arguments to pass down
 #' @keywords internal
 #' @export
@@ -14,16 +18,20 @@ ci <- function(object, probability = FALSE, alpha = 0.05, alternative = c("two.s
 # Methods for class LF ----------------------------------------------------
 
 #' Confidence Intervals for Bias-corrected LF Estimators
-#' @description Computes confidence intervals for bias-corrected estimators; Each
-#' row corresponds to a loading.
+#' @description Computes confidence intervals for bias-corrected estimators;
+#'   Each row corresponds to a loading.
 #' @param object An object of class `LF`, a result of a call to `LF`
-#' @param probability Whether returns CI with probability transformation or not (default=\code{FALSE})
-#' @param alpha Level of significance to construct confidence interval (default=0.05)
-#' @param alternative Indicates the alternative hypothesis to construct confidence interval and must be one of "two.sided" (default), "less", or "greater".
+#' @param probability Whether returns CI with probability transformation or not
+#'   (default=\code{FALSE})
+#' @param alpha Level of significance to construct confidence interval
+#'   (default=0.05)
+#' @param alternative Indicates the alternative hypothesis to construct
+#'   confidence interval and must be one of "two.sided" (default), "less", or
+#'   "greater".
 #' @param ... arguments to pass down
 #' @keywords internal
-#' @return A matrix with columns giving lower and upper confidence limits for bias-corrected
-#' estimators.
+#' @return A matrix with columns giving lower and upper confidence limits for
+#'   bias-corrected estimators.
 #' @export
 #' @examples
 #' \dontrun{
@@ -53,7 +61,8 @@ ci.LF <- function(object, probability = FALSE, alpha = 0.05, alternative = c("tw
 #' @description `summary` method for class `LF`
 #' @param object An object of class `LF`, a result of a call to `LF`
 #' @param ... arguments to pass down
-#' @return The function `summary.LF` computes and returns a list of summary statistics.
+#' @return The function `summary.LF` computes and returns a list of summary
+#'   statistics.
 #' \item{output.est}{a \eqn{ncol(loading.mat)} x 7 matrix with columns for the loading,
 #' plugin(biased) estimators, bias-corrected estimators, its standard error, z-statistic,
 #' corresponding (two-sided) p-value and significance stars; Each row corresponds to each loading.}
@@ -106,15 +115,19 @@ print.summary.LF <- function(x, digits = max(3, getOption("digits") - 3), ...) {
 # Methods for class CATE --------------------------------------------------
 
 #' Confidence Intervals for Bias-corrected CATE Estimators
-#' @description Computes confidence intervals for bias-corrected estimators; Each
-#' row corresponds to a loading.
+#' @description Computes confidence intervals for bias-corrected estimators;
+#'   Each row corresponds to a loading.
 #' @param object An object of class `CATE`, a result of a call to `CATE`
-#' @param probability Whether returns CI with probability transformation or not (default=\code{FALSE})
-#' @param alpha Level of significance to construct confidence interval (default=0.05)
-#' @param alternative Indicates the alternative hypothesis to construct confidence interval and must be one of "two.sided" (default), "less", or "greater".
+#' @param probability Whether returns CI with probability transformation or not
+#'   (default=\code{FALSE})
+#' @param alpha Level of significance to construct confidence interval
+#'   (default=0.05)
+#' @param alternative Indicates the alternative hypothesis to construct
+#'   confidence interval and must be one of "two.sided" (default), "less", or
+#'   "greater".
 #' @param ... arguments to pass down
-#' @return A matrix with columns giving lower and upper confidence limits for bias-corrected
-#' estimators.
+#' @return A matrix with columns giving lower and upper confidence limits for
+#'   bias-corrected estimators.
 #' @keywords internal
 #' @export
 #' @examples
@@ -165,7 +178,8 @@ ci.CATE <- function(object, probability = FALSE, alpha = 0.05, alternative = c("
 #' @description `summary` method for class `CATE`
 #' @param object An object of class `CATE`, a result of a call to `CATE`
 #' @param ... arguments to pass down
-#' @return The function `summary.CATE` computes and returns a list of summary statistics.
+#' @return The function `summary.CATE` computes and returns a list of summary
+#'   statistics.
 #' \item{output.est}{a \eqn{ncol(loading.mat)} x 7 matrix with columns for the loading,
 #' plugin(biased) estimators, bias-corrected estimators, its standard error, z-statistic,
 #' corresponding (two-sided) p-value and significance stars; Each row corresponds to each loading.}
@@ -219,15 +233,19 @@ print.summary.CATE <- function(x, digits = max(3, getOption("digits") - 3), ...)
 # Methods for class QF ----------------------------------------------------
 
 #' Confidence Intervals for Bias-corrected QF Estimators
-#' @description Computes confidence intervals for bias-corrected estimators; Each
-#' row corresponds to a tau value.
+#' @description Computes confidence intervals for bias-corrected estimators;
+#'   Each row corresponds to a tau value.
 #' @param object An object of class `QF`, a result of a call to `QF`
-#' @param probability Whether returns CI with probability transformation or not (default=\code{FALSE})
-#' @param alpha Level of significance to construct confidence interval (default=0.05)
-#' @param alternative Indicates the alternative hypothesis to construct confidence interval and must be one of "two.sided" (default), "less", or "greater".
+#' @param probability Whether returns CI with probability transformation or not
+#'   (default=\code{FALSE})
+#' @param alpha Level of significance to construct confidence interval
+#'   (default=0.05)
+#' @param alternative Indicates the alternative hypothesis to construct
+#'   confidence interval and must be one of "two.sided" (default), "less", or
+#'   "greater".
 #' @param ... arguments to pass down
-#' @return A matrix with columns giving lower and upper confidence limits for bias-corrected
-#' estimators, with rows corresponding to different tau.
+#' @return A matrix with columns giving lower and upper confidence limits for
+#'   bias-corrected estimators, with rows corresponding to different tau.
 #' @keywords internal
 #' @export
 #' @examples
@@ -263,7 +281,8 @@ ci.QF <- function(object, probability = FALSE, alpha = 0.05, alternative = c("tw
 #' @description `summary` method for class `QF`
 #' @param object An object of class `QF`, a result of a call to `QF`
 #' @param ... arguments to pass down
-#' @return The function `summary.QF` computes and returns a list of summary statistics.
+#' @return The function `summary.QF` computes and returns a list of summary
+#'   statistics.
 #' \item{output.est}{a \eqn{length(tau.vec)} x 7 matrix with columns for tau,
 #' plugin(biased) estimators, bias-corrected estimators, its standard error, z-statistic,
 #' corresponding (two-sided) p-value and significance stars; Each row corresponds to each tau.}
@@ -321,11 +340,14 @@ print.summary.QF <- function(x, digits = max(3, getOption("digits") - 3), ...) {
 #' Confidence Intervals for Bias-corrected InnProd Estimators
 #' @description Computes confidence intervals for bias-corrected estimator
 #' @param object An object of class `InnProd`, a result of a call to `InnProd`
-#' @param alpha Level of significance to construct confidence interval (default=0.05)
-#' @param alternative Indicates the alternative hypothesis to construct confidence interval and must be one of "two.sided" (default), "less", or "greater".
+#' @param alpha Level of significance to construct confidence interval
+#'   (default=0.05)
+#' @param alternative Indicates the alternative hypothesis to construct
+#'   confidence interval and must be one of "two.sided" (default), "less", or
+#'   "greater".
 #' @param ... arguments to pass down
 #' @return A vector giving lower and upper confidence limits for bias-corrected
-#' estimator
+#'   estimator
 #' @keywords internal
 #' @export
 #' @examples
@@ -361,7 +383,8 @@ ci.InnProd <- function(object, probability = FALSE, alpha = 0.05, alternative = 
 #' @description `summary` method for class `InnProd`
 #' @param object An object of class `InnProd`, a result of a call to `InnProd`
 #' @param ... arguments to pass down
-#' @return The function `summary.InnProd` computes and returns a list of summary statistics.
+#' @return The function `summary.InnProd` computes and returns a list of summary
+#'   statistics.
 #' \item{output.est}{A 6-dimensional vector with elements for plugin(biased) estimators, bias-corrected estimators, its standard error, z-statistic,
 #' corresponding (two-sided) p-value and significance stars}
 #' @keywords internal
@@ -394,7 +417,8 @@ summary.InnProd <- function(object, ...) {
 
 #' Printing summarizing InnProd
 #' @description `print` method for class `summary.InnProd`
-#' @param x An object of class `summary.InnProd`, a result of a call to `summary.InnProd`
+#' @param x An object of class `summary.InnProd`, a result of a call to
+#'   `summary.InnProd`
 #' @param digits The number of digits to use when printing
 #' @param ... arguments to pass down
 #' @keywords internal
@@ -418,11 +442,14 @@ print.summary.InnProd <- function(x, digits = max(3, getOption("digits") - 3), .
 #' Confidence Intervals for Bias-corrected Dist Estimators
 #' @description Computes confidence intervals for bias-corrected estimator
 #' @param object An object of class `Dist`, a result of a call to `Dist`
-#' @param alpha Level of significance to construct confidence interval (default=0.05)
-#' @param alternative Indicates the alternative hypothesis to construct confidence interval and must be one of "two.sided" (default), "less", or "greater".
+#' @param alpha Level of significance to construct confidence interval
+#'   (default=0.05)
+#' @param alternative Indicates the alternative hypothesis to construct
+#'   confidence interval and must be one of "two.sided" (default), "less", or
+#'   "greater".
 #' @param ... arguments to pass down
 #' @return A vector giving lower and upper confidence limits for bias-corrected
-#' estimator
+#'   estimator
 #' @keywords internal
 #' @export
 #' @examples
@@ -458,7 +485,8 @@ ci.Dist <- function(object, probability = FALSE, alpha = 0.05, alternative = c("
 #' @description `summary` method for class `Dist`
 #' @param object An object of class `Dist`, a result of a call to `Dist`
 #' @param ... arguments to pass down
-#' @return The function `summary.Dist` computes and returns a list of summary statistics.
+#' @return The function `summary.Dist` computes and returns a list of summary
+#'   statistics.
 #' \item{output.est}{A 6-dimensional vector with elements for plugin(biased) estimators, bias-corrected estimators, its standard error, z-statistic,
 #' corresponding (two-sided) p-value and significance stars}
 #' @keywords internal
@@ -491,7 +519,8 @@ summary.Dist <- function(object, ...) {
 
 #' Printing summarizing Dist
 #' @description `print` method for class `summary.Dist`
-#' @param x An object of class `summary.Dist`, a result of a call to `summary.Dist`
+#' @param x An object of class `summary.Dist`, a result of a call to
+#'   `summary.Dist`
 #' @param digits The number of digits to use when printing
 #' @param ... arguments to pass down
 #' @keywords internal

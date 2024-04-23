@@ -8,8 +8,8 @@
 #'   \eqn{|G|\times}\eqn{|G|}. If \code{NULL} A would be set as the
 #'   \eqn{|G|\times}\eqn{|G|} submatrix of the population covariance matrix
 #'   corresponding to the index set \code{G} (default = \code{NULL})
-#' @param model The high dimensional regression model, either \code{"linear"}
-#'   or \code{"logistic"} or \code{"logistic_alter"}
+#' @param model The high dimensional regression model, either \code{"linear"} or
+#'   \code{"logistic"} or \code{"logistic_alter"}
 #' @param intercept Should intercept be fitted for the initial estimator
 #'   (default = \code{TRUE})
 #' @param beta.init The initial estimator of the regression vector (default =
@@ -28,9 +28,8 @@
 #' @param tau The enlargement factor for asymptotic variance of the
 #'   bias-corrected estimator to handle super-efficiency. It allows for a scalar
 #'   or vector. (default = \code{c(0.25,0.5,1)})
-#' @param alpha Level of significance to construct two-sided confidence interval
-#'   (default = 0.05)
-#' @param verbose Should intermediate message(s) be printed. (default = \code{FALSE})
+#' @param verbose Should intermediate message(s) be printed. (default =
+#'   \code{FALSE})
 #'
 #' @return
 #' \item{est.plugin}{The plugin(biased) estimator for the quadratic form of the
@@ -39,9 +38,6 @@
 #' regression vector}
 #' \item{se}{Standard errors of the bias-corrected estimator,
 #' length of \code{tau}; corrsponding to different values of \code{tau}}
-#' \item{ci.mat}{The matrix of two.sided confidence interval for the quadratic
-#' form of the regression vector; row corresponds to different values of
-#' \code{tau}}
 #' @export
 #'
 #' @import CVXR glmnet
@@ -59,7 +55,7 @@
 #' summary(Est)
 QF <- function(X, y, G, A = NULL, model = c("linear", "logistic", "logistic_alter"),
                intercept = TRUE, beta.init = NULL, split = TRUE, lambda = NULL, mu = NULL,
-               prob.filter = 0.05, rescale = 1.1, tau = c(0.25, 0.5, 1), alpha = 0.05, verbose = FALSE) {
+               prob.filter = 0.05, rescale = 1.1, tau = c(0.25, 0.5, 1), verbose = FALSE) {
   ## Check arguments
   model <- match.arg(model)
   X <- as.matrix(X)
@@ -69,7 +65,7 @@ QF <- function(X, y, G, A = NULL, model = c("linear", "logistic", "logistic_alte
   check.args.QF(
     X = X, y = y, G = G, A = A, model = model, intercept = intercept, beta.init = beta.init,
     split = split, lambda = lambda, mu = mu, prob.filter = prob.filter,
-    rescale = rescale, tau = tau, alpha = alpha, verbose = verbose
+    rescale = rescale, tau = tau, verbose = verbose
   )
 
   # Preparation -------------------------------------------------------------
@@ -159,14 +155,10 @@ QF <- function(X, y, G, A = NULL, model = c("linear", "logistic", "logistic_alte
   V <- (V.base + V.A + V.add)
   se <- sqrt(V)
 
-  ci.mat <- cbind(pmax(est.debias - qnorm(1 - alpha / 2) * se, 0), pmax(est.debias + qnorm(1 - alpha / 2) * se, 0))
-  colnames(ci.mat) <- c("lower", "upper")
-  rownames(ci.mat) <- paste0("tau", tau)
   obj <- list(
     est.plugin = est.plugin,
     est.debias = est.debias,
     se = se,
-    ci.mat = ci.mat,
     tau = tau
   )
 

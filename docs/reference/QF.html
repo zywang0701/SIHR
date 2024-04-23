@@ -107,7 +107,6 @@ generalized linear regressions</p>
 <span>  prob.filter <span class="op">=</span> <span class="fl">0.05</span>,</span>
 <span>  rescale <span class="op">=</span> <span class="fl">1.1</span>,</span>
 <span>  tau <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">1</span><span class="op">)</span>,</span>
-<span>  alpha <span class="op">=</span> <span class="fl">0.05</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -134,8 +133,8 @@ corresponding to the index set <code>G</code> (default = <code>NULL</code>)</p><
 
 
 <dt>model</dt>
-<dd><p>The high dimensional regression model, either <code>"linear"</code>
-or <code>"logistic"</code> or <code>"logistic_alter"</code></p></dd>
+<dd><p>The high dimensional regression model, either <code>"linear"</code> or
+<code>"logistic"</code> or <code>"logistic_alter"</code></p></dd>
 
 
 <dt>intercept</dt>
@@ -180,13 +179,9 @@ bias-corrected estimator to handle super-efficiency. It allows for a scalar
 or vector. (default = <code>c(0.25,0.5,1)</code>)</p></dd>
 
 
-<dt>alpha</dt>
-<dd><p>Level of significance to construct two-sided confidence interval
-(default = 0.05)</p></dd>
-
-
 <dt>verbose</dt>
-<dd><p>Should intermediate message(s) be printed. (default = <code>FALSE</code>)</p></dd>
+<dd><p>Should intermediate message(s) be printed. (default =
+<code>FALSE</code>)</p></dd>
 
 </dl></div>
     <div id="value">
@@ -203,11 +198,6 @@ regression vector</p></dd>
 <dd><p>Standard errors of the bias-corrected estimator,
 length of <code>tau</code>; corrsponding to different values of <code>tau</code></p></dd>
 
-<dt>ci.mat</dt>
-<dd><p>The matrix of two.sided confidence interval for the quadratic
-form of the regression vector; row corresponds to different values of
-<code>tau</code></p></dd>
-
 </dl></div>
 
     <div id="ref-examples">
@@ -220,9 +210,9 @@ form of the regression vector; row corresponds to different values of
 <span class="r-in"><span><span class="co">## compute confidence intervals</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="ci.html">ci</a></span><span class="op">(</span><span class="va">Est</span>, alpha <span class="op">=</span> <span class="fl">0.05</span>, alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    tau    lower    upper</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 0.25 1.693209 3.772612</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 0.50 1.684013 3.781809</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 1.00 1.665858 3.799963</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 0.25 2.327496 5.375758</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 0.50 2.321208 5.382046</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 1.00 2.308708 5.394545</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## summary statistics</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">Est</span><span class="op">)</span></span></span>
@@ -230,9 +220,9 @@ form of the regression vector; row corresponds to different values of
 <span class="r-out co"><span class="r-pr">#&gt;</span> Inference for Quadratic Functional</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   tau est.plugin est.debias Std. Error z value  Pr(&gt;|z|)    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.25      1.501      2.733     0.5305   5.152 2.579e-07 ***</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.50      1.501      2.733     0.5352   5.107 3.278e-07 ***</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1.00      1.501      2.733     0.5444   5.020 5.172e-07 ***</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.25      1.996      3.852     0.7776   4.953 7.307e-07 ***</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.50      1.996      3.852     0.7808   4.933 8.111e-07 ***</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1.00      1.996      3.852     0.7872   4.893 9.946e-07 ***</span>
 </code></pre></div>
     </div>
   </div>

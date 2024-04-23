@@ -5,8 +5,8 @@
 #' @param y Outcome vector, of length \eqn{n}
 #' @param loading.mat Loading matrix, nrow=\eqn{p}, each column corresponds to a
 #'   loading of interest
-#' @param model The high dimensional regression model, either \code{"linear"}
-#'   or \code{"logistic"} or \code{"logistic_alter"}
+#' @param model The high dimensional regression model, either \code{"linear"} or
+#'   \code{"logistic"} or \code{"logistic_alter"}
 #' @param intercept Should intercept be fitted for the initial estimator
 #'   (default = \code{TRUE})
 #' @param intercept.loading Should intercept term be included for the loading
@@ -22,9 +22,8 @@
 #'   observations in logistic regression. (default = 0.05)
 #' @param rescale The factor to enlarge the standard error to account for the
 #'   finite sample bias. (default = 1.1)
-#' @param alpha Level of significance to construct two-sided confidence interval
-#'   (default = 0.05)
-#' @param verbose Should intermediate message(s) be printed. (default = \code{FALSE})
+#' @param verbose Should intermediate message(s) be printed. (default =
+#'   \code{FALSE})
 #'
 #' @return
 #' \item{est.plugin.vec}{The vector of plugin(biased) estimators for the
@@ -35,9 +34,6 @@
 #' each corresponding to a loading of interest}
 #' \item{se.vec}{The vector of standard errors of the bias-corrected estimators,
 #' length of \code{ncol(loading.mat)}; each corresponding to a loading of interest}
-#' \item{ci.mat}{The matrix of two.sided confidence interval for the linear
-#' combination, of dimension \code{ncol(loading.mat)} x \eqn{2}; each row
-#' corresponding to a loading of interest}
 #' \item{proj.mat}{The matrix of projection directions; each column corresponding
 #' to a loading of interest.}
 #'
@@ -60,7 +56,7 @@
 #' summary(Est)
 LF <- function(X, y, loading.mat, model = c("linear", "logistic", "logistic_alter"),
                intercept = TRUE, intercept.loading = FALSE, beta.init = NULL, lambda = NULL,
-               mu = NULL, prob.filter = 0.05, rescale = 1.1, alpha = 0.05, verbose = FALSE) {
+               mu = NULL, prob.filter = 0.05, rescale = 1.1, verbose = FALSE) {
   ## Check arguments
   model <- match.arg(model)
   X <- as.matrix(X)
@@ -69,7 +65,7 @@ LF <- function(X, y, loading.mat, model = c("linear", "logistic", "logistic_alte
   check.args.LF(
     X = X, y = y, loading.mat = loading.mat, model = model, intercept = intercept,
     intercept.loading = intercept.loading, beta.init = beta.init, lambda = lambda,
-    mu = mu, rescale = rescale, prob.filter = prob.filter, alpha = alpha,
+    mu = mu, rescale = rescale, prob.filter = prob.filter,
     verbose = verbose
   )
   loading_include_intercept <- (ncol(X) == (nrow(loading.mat) - 1))
@@ -121,9 +117,6 @@ LF <- function(X, y, loading.mat, model = c("linear", "logistic", "logistic_alte
   # Establish Inference for loadings ----------------------------------------
   n.loading <- ncol(loading.mat)
   est.plugin.vec <- est.debias.vec <- se.vec <- rep(NA, n.loading)
-  ci.mat <- matrix(NA, nrow = n.loading, ncol = 2)
-  colnames(ci.mat) <- c("lower", "upper")
-  rownames(ci.mat) <- paste("load", 1:n.loading, sep = "")
   proj.mat <- matrix(NA, nrow = p, ncol = n.loading)
 
   for (i.loading in 1:n.loading) {
@@ -155,13 +148,11 @@ LF <- function(X, y, loading.mat, model = c("linear", "logistic", "logistic_alte
     ## Compute SE and Construct CI
     V <- sum(((sqrt(weight^2 * cond_var) * X) %*% direction)^2) / n * loading.norm^2
     if ((n > 0.9 * p) & (model == "linear")) se <- sqrt(V / n) else se <- rescale * sqrt(V / n)
-    ci <- c(est.debias - qnorm(1 - alpha / 2) * se, est.debias + qnorm(1 - alpha / 2) * se)
 
     ## Store Infos
     est.plugin.vec[i.loading] <- est.plugin
     est.debias.vec[i.loading] <- est.debias
     se.vec[i.loading] <- se
-    ci.mat[i.loading, ] <- ci
     proj.mat[, i.loading] <- direction * loading.norm
   }
 
@@ -169,7 +160,6 @@ LF <- function(X, y, loading.mat, model = c("linear", "logistic", "logistic_alte
     est.plugin.vec = est.plugin.vec,
     est.debias.vec = est.debias.vec,
     se.vec = se.vec,
-    ci.mat = ci.mat,
     proj.mat = proj.mat
   )
 

@@ -12,7 +12,8 @@
 \item{...}{arguments to pass down}
 }
 \value{
-The function `summary.InnProd` computes and returns a list of summary statistics.
+The function `summary.InnProd` computes and returns a list of summary
+  statistics.
 \item{output.est}{A 6-dimensional vector with elements for plugin(biased) estimators, bias-corrected estimators, its standard error, z-statistic,
 corresponding (two-sided) p-value and significance stars}
 }

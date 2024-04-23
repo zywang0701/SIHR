@@ -20,7 +20,6 @@ CATE(
   mu = NULL,
   prob.filter = 0.05,
   rescale = 1.1,
-  alpha = 0.05,
   verbose = FALSE
 )
 }
@@ -38,8 +37,8 @@ CATE(
 \item{loading.mat}{Loading matrix, nrow=\eqn{p}, each column corresponds to a
 loading of interest}
 
-\item{model}{The high dimensional regression model, either \code{"linear"}
-or \code{"logistic"} or \code{"logistic_alter"}}
+\item{model}{The high dimensional regression model, either \code{"linear"} or
+\code{"logistic"} or \code{"logistic_alter"}}
 
 \item{intercept}{Should intercept(s) be fitted for the initial estimators
 (default = \code{TRUE})}
@@ -66,15 +65,13 @@ observations in logistic regression. (default = 0.05)}
 \item{rescale}{The factor to enlarge the standard error to account for the
 finite sample bias. (default = 1.1)}
 
-\item{alpha}{Level of significance to construct two-sided confidence interval
-(default = 0.05)}
-
 \item{verbose}{Should intermediate message(s) be printed (default =
 \code{FALSE})}
 }
 \value{
-A list consists of plugin estimators, debiased estimators, and confidence intervals.
-For logistic regression, it also returns those items after probability transformation.
+A list consists of plugin estimators, debiased estimators, and
+  confidence intervals. For logistic regression, it also returns those items
+  after probability transformation.
 \item{est.plugin.vec}{The vector of plugin(biased) estimators for the
 linear combination of regression coefficients, length of \code{ncol(loading.mat)};
 corresponding to different column in \code{loading.mat}}
@@ -84,18 +81,12 @@ corresponding to different column in \code{loading.mat}}
 \item{se.vec}{The vector of standard errors of the bias-corrected estimators,
 length of \code{ncol(loading.mat)}; corresponding to different column in
 \code{loading.mat}}
-\item{ci.mat}{The matrix of two.sided confidence interval for the linear
-combination, dimension of \code{ncol(loading.mat)} x \eqn{2}; the row
-corresponding to different column in \code{loading.mat}}
 \item{prob.debias.vec}{The vector of bias-corrected estimators after probability
 transformation, length of \code{ncol(loading.mat)}; corresponding to different
 column in \code{loading.mat}.}
 \item{prob.se.vec}{The vector of standard errors of the bias-corrected
 estimators after probability transformation, length of \code{ncol(loading.mat)};
 corresponding to different column in \code{loading.mat}.}
-\item{prob.ci.mat}{The matrix of two.sided confidence interval of the bias-corrected
-estimators after probability transformation, dimension of \code{ncol(loading.mat)} x \eqn{2};
-the row corresponding to different column in \code{loading.mat}.}
 }
 \description{
 Computes the bias-corrected estimator of the difference of

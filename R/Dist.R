@@ -1,36 +1,49 @@
-#' Inference for weighted quadratic functional of difference of the regression vectors (excluding the intercept term) in
-#' high dimensional generalized linear regressions.
+#' Inference for weighted quadratic functional of difference of the regression
+#' vectors (excluding the intercept term) in high dimensional generalized linear
+#' regressions.
 #'
-#' @param X1 Design matrix for the first sample, of dimension \eqn{n_1} x \eqn{p}
+#' @param X1 Design matrix for the first sample, of dimension \eqn{n_1} x
+#'   \eqn{p}
 #' @param y1 Outcome vector for the first sample, of length \eqn{n_1}
-#' @param X2 Design matrix for the second sample, of dimension \eqn{n_2} x \eqn{p}
+#' @param X2 Design matrix for the second sample, of dimension \eqn{n_2} x
+#'   \eqn{p}
 #' @param y2 Outcome vector for the second sample, of length \eqn{n_1}
 #' @param G The set of indices, \code{G} in the quadratic form
-#' @param A The matrix A in the quadratic form, of dimension \eqn{|G|\times}\eqn{|G|}. If \code{NULL} A would be set as the \eqn{|G|\times}\eqn{|G|} submatrix of the population covariance matrix corresponding to the index set \code{G} (default = \code{NULL})
-#' @param model The high dimensional regression model, either \code{"linear"} or \code{"logistic"} or \code{"logistic_alter"}
-#' @param intercept Should intercept(s) be fitted for the initial estimators (default = \code{TRUE})
-#' @param beta.init1 The initial estimator of the regression vector for the 1st data (default = \code{NULL})
-#' @param beta.init2 The initial estimator of the regression vector for the 2nd data (default = \code{NULL})
+#' @param A The matrix A in the quadratic form, of dimension
+#'   \eqn{|G|\times}\eqn{|G|}. If \code{NULL} A would be set as the
+#'   \eqn{|G|\times}\eqn{|G|} submatrix of the population covariance matrix
+#'   corresponding to the index set \code{G} (default = \code{NULL})
+#' @param model The high dimensional regression model, either \code{"linear"} or
+#'   \code{"logistic"} or \code{"logistic_alter"}
+#' @param intercept Should intercept(s) be fitted for the initial estimators
+#'   (default = \code{TRUE})
+#' @param beta.init1 The initial estimator of the regression vector for the 1st
+#'   data (default = \code{NULL})
+#' @param beta.init2 The initial estimator of the regression vector for the 2nd
+#'   data (default = \code{NULL})
 #' @param split Sampling splitting or not for computing the initial estimators.
-#' It take effects only when \code{beta.init1 =  NULL} or \code{beta.init2 = NULL}. (default = \code{TRUE})
-#' @param lambda The tuning parameter in fitting initial model. If \code{NULL}, it will be picked by cross-validation. (default = \code{NULL})
-#' @param mu The dual tuning parameter used in the construction of the projection direction. If \code{NULL} it will be searched automatically. (default = \code{NULL})
-#' @param prob.filter The threshold of estimated probabilities for filtering observations in logistic regression. (default = 0.05)
-#' @param rescale The factor to enlarge the standard error to account for the finite sample bias. (default = 1.1)
+#'   It take effects only when \code{beta.init1 =  NULL} or \code{beta.init2 =
+#'   NULL}. (default = \code{TRUE})
+#' @param lambda The tuning parameter in fitting initial model. If \code{NULL},
+#'   it will be picked by cross-validation. (default = \code{NULL})
+#' @param mu The dual tuning parameter used in the construction of the
+#'   projection direction. If \code{NULL} it will be searched automatically.
+#'   (default = \code{NULL})
+#' @param prob.filter The threshold of estimated probabilities for filtering
+#'   observations in logistic regression. (default = 0.05)
+#' @param rescale The factor to enlarge the standard error to account for the
+#'   finite sample bias. (default = 1.1)
 #' @param tau The enlargement factor for asymptotic variance of the
 #'   bias-corrected estimator to handle super-efficiency. It allows for a scalar
 #'   or vector. (default = \code{c(0.25,0.5, 1)})
-#' @param alpha Level of significance to construct two-sided confidence interval (default = 0.05)
-#' @param verbose Should intermediate message(s) be printed. (default = \code{FALSE})
+#' @param verbose Should intermediate message(s) be printed. (default =
+#'   \code{FALSE})
 #'
-#' @return
-#' \item{est.plugin}{The plugin(biased) estimator for the quadratic form of the regression vectors restricted to \code{G}}
-#' \item{est.debias}{The bias-corrected estimator of the quadratic form of the regression vectors}
+#' @return \item{est.plugin}{The plugin(biased) estimator for the quadratic form
+#' of the regression vectors restricted to \code{G}} \item{est.debias}{The
+#' bias-corrected estimator of the quadratic form of the regression vectors}
 #' \item{se}{Standard errors of the bias-corrected estimator,
 #' length of \code{tau}; corrsponding to different values of \code{tau}}
-#' \item{ci.mat}{The matrix of two.sided confidence interval for the quadratic
-#' form of the regression vector; row corresponds to different values of
-#' \code{tau}}
 #' @export
 #'
 #' @import CVXR glmnet
@@ -43,16 +56,21 @@
 #' G <- c(1, 2)
 #' A <- matrix(c(1.5, 0.8, 0.8, 1.5), nrow = 2, ncol = 2)
 #' Est <- Dist(X1, y1, X2, y2, G, A, model = "linear")
-#' Est$ci
+#'
+#' ## compute confidence intervals
+#' ci(Est, alpha = 0.05, alternative = "two.sided")
+#'
+#' ## summary statistics
+#' summary(Est)
 Dist <- function(X1, y1, X2, y2, G, A = NULL, model = c("linear", "logistic", "logistic_alter"), intercept = TRUE, beta.init1 = NULL, beta.init2 = NULL,
-                 split = TRUE, lambda = NULL, mu = NULL, prob.filter = 0.05, rescale = 1.1, tau = c(0.25, 0.5, 1), alpha = 0.05, verbose = FALSE) {
+                 split = TRUE, lambda = NULL, mu = NULL, prob.filter = 0.05, rescale = 1.1, tau = c(0.25, 0.5, 1), verbose = FALSE) {
   ## Check arguments
   model <- match.arg(model)
   p <- ncol(X1) + as.integer(intercept)
   nullA <- ifelse(is.null(A), TRUE, FALSE)
   check.args.Dist(
     X1 = X1, y1 = y1, X2 = X2, y2 = y2, G = G, A = A, model = model, intercept = intercept, beta.init1 = beta.init1, beta.init2 = beta.init2,
-    split = split, lambda = lambda, mu = mu, prob.filter = prob.filter, rescale = rescale, tau = tau, alpha = alpha, verbose = verbose
+    split = split, lambda = lambda, mu = mu, prob.filter = prob.filter, rescale = rescale, tau = tau, verbose = verbose
   )
 
   # Preparation -------------------------------------------------------------
@@ -115,8 +133,8 @@ Dist <- function(X1, y1, X2, y2, G, A = NULL, model = c("linear", "logistic", "l
   if (intercept) loading <- loading[-1]
 
   ## Run LF on two samples separately
-  Est1 <- LF(X1, y1, loading.mat = loading, model = model, intercept = intercept, intercept.loading = FALSE, beta.init = beta.init1, lambda = lambda, mu = mu, prob.filter = prob.filter, rescale = rescale, alpha = alpha, verbose = verbose)
-  Est2 <- LF(X2, y2, loading.mat = loading, model = model, intercept = intercept, intercept.loading = FALSE, beta.init = beta.init2, lambda = lambda, mu = mu, prob.filter = prob.filter, rescale = rescale, alpha = alpha, verbose = verbose)
+  Est1 <- LF(X1, y1, loading.mat = loading, model = model, intercept = intercept, intercept.loading = FALSE, beta.init = beta.init1, lambda = lambda, mu = mu, prob.filter = prob.filter, rescale = rescale, verbose = verbose)
+  Est2 <- LF(X2, y2, loading.mat = loading, model = model, intercept = intercept, intercept.loading = FALSE, beta.init = beta.init2, lambda = lambda, mu = mu, prob.filter = prob.filter, rescale = rescale, verbose = verbose)
 
   est.plugin <- as.numeric(t(gamma.init[G]) %*% A %*% gamma.init[G])
   est.debias <- est.plugin + 2 * (Est2$est.debias.vec - Est2$est.plugin.vec) - 2 * (Est1$est.debias.vec - Est1$est.plugin.vec)
@@ -132,15 +150,10 @@ Dist <- function(X1, y1, X2, y2, G, A = NULL, model = c("linear", "logistic", "l
   if (model == "linear") se.add <- tau * (1 / sqrt(n.min)) else se.add <- tau * max(1 / sqrt(n.min), sparsity * log(p) / n.min)
   se <- sqrt(V.base + V.A) + se.add
 
-  ci.mat <- cbind(pmax(est.debias - qnorm(1 - alpha / 2) * se, 0), pmax(est.debias + qnorm(1 - alpha / 2) * se, 0))
-  colnames(ci.mat) <- c("lower", "upper")
-  rownames(ci.mat) <- paste0("tau", tau)
-
   obj <- list(
     est.plugin = est.plugin,
     est.debias = est.debias,
     se = se,
-    ci.mat = ci.mat,
     tau = tau
   )
 

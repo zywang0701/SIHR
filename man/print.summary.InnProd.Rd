@@ -7,7 +7,8 @@
 \method{print}{summary.InnProd}(x, digits = max(3, getOption("digits") - 3), ...)
 }
 \arguments{
-\item{x}{An object of class `summary.InnProd`, a result of a call to `summary.InnProd`}
+\item{x}{An object of class `summary.InnProd`, a result of a call to
+`summary.InnProd`}
 
 \item{digits}{The number of digits to use when printing}
 

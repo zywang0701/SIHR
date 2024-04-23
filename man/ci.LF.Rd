@@ -15,21 +15,25 @@
 \arguments{
 \item{object}{An object of class `LF`, a result of a call to `LF`}
 
-\item{probability}{Whether returns CI with probability transformation or not (default=\code{FALSE})}
+\item{probability}{Whether returns CI with probability transformation or not
+(default=\code{FALSE})}
 
-\item{alpha}{Level of significance to construct confidence interval (default=0.05)}
+\item{alpha}{Level of significance to construct confidence interval
+(default=0.05)}
 
-\item{alternative}{Indicates the alternative hypothesis to construct confidence interval and must be one of "two.sided" (default), "less", or "greater".}
+\item{alternative}{Indicates the alternative hypothesis to construct
+confidence interval and must be one of "two.sided" (default), "less", or
+"greater".}
 
 \item{...}{arguments to pass down}
 }
 \value{
-A matrix with columns giving lower and upper confidence limits for bias-corrected
-estimators.
+A matrix with columns giving lower and upper confidence limits for
+  bias-corrected estimators.
 }
 \description{
-Computes confidence intervals for bias-corrected estimators; Each
-row corresponds to a loading.
+Computes confidence intervals for bias-corrected estimators;
+  Each row corresponds to a loading.
 }
 \examples{
 \dontrun{

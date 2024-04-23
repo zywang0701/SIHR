@@ -11,8 +11,8 @@
 #' @param y2 Outcome vector for the second sample, of length \eqn{n_1}
 #' @param loading.mat Loading matrix, nrow=\eqn{p}, each column corresponds to a
 #'   loading of interest
-#' @param model The high dimensional regression model, either \code{"linear"}
-#'   or \code{"logistic"} or \code{"logistic_alter"}
+#' @param model The high dimensional regression model, either \code{"linear"} or
+#'   \code{"logistic"} or \code{"logistic_alter"}
 #' @param intercept Should intercept(s) be fitted for the initial estimators
 #'   (default = \code{TRUE})
 #' @param intercept.loading Should intercept term be included for the
@@ -30,13 +30,12 @@
 #'   observations in logistic regression. (default = 0.05)
 #' @param rescale The factor to enlarge the standard error to account for the
 #'   finite sample bias. (default = 1.1)
-#' @param alpha Level of significance to construct two-sided confidence interval
-#'   (default = 0.05)
 #' @param verbose Should intermediate message(s) be printed (default =
 #'   \code{FALSE})
 #'
-#' @return A list consists of plugin estimators, debiased estimators, and confidence intervals.
-#' For logistic regression, it also returns those items after probability transformation.
+#' @return A list consists of plugin estimators, debiased estimators, and
+#'   confidence intervals. For logistic regression, it also returns those items
+#'   after probability transformation.
 #' \item{est.plugin.vec}{The vector of plugin(biased) estimators for the
 #' linear combination of regression coefficients, length of \code{ncol(loading.mat)};
 #' corresponding to different column in \code{loading.mat}}
@@ -46,18 +45,12 @@
 #' \item{se.vec}{The vector of standard errors of the bias-corrected estimators,
 #' length of \code{ncol(loading.mat)}; corresponding to different column in
 #' \code{loading.mat}}
-#' \item{ci.mat}{The matrix of two.sided confidence interval for the linear
-#' combination, dimension of \code{ncol(loading.mat)} x \eqn{2}; the row
-#' corresponding to different column in \code{loading.mat}}
 #' \item{prob.debias.vec}{The vector of bias-corrected estimators after probability
 #' transformation, length of \code{ncol(loading.mat)}; corresponding to different
 #' column in \code{loading.mat}.}
 #' \item{prob.se.vec}{The vector of standard errors of the bias-corrected
 #' estimators after probability transformation, length of \code{ncol(loading.mat)};
 #' corresponding to different column in \code{loading.mat}.}
-#' \item{prob.ci.mat}{The matrix of two.sided confidence interval of the bias-corrected
-#' estimators after probability transformation, dimension of \code{ncol(loading.mat)} x \eqn{2};
-#' the row corresponding to different column in \code{loading.mat}.}
 #'
 #' @export
 #' @import CVXR glmnet
@@ -80,21 +73,17 @@
 #' summary(Est)
 CATE <- function(X1, y1, X2, y2, loading.mat, model = c("linear", "logistic", "logistic_alter"),
                  intercept = TRUE, intercept.loading = FALSE, beta.init1 = NULL, beta.init2 = NULL, lambda = NULL, mu = NULL,
-                 prob.filter = 0.05, rescale = 1.1, alpha = 0.05, verbose = FALSE) {
+                 prob.filter = 0.05, rescale = 1.1, verbose = FALSE) {
   model <- match.arg(model)
 
   if (verbose) cat(sprintf("Call: Inference for Linear Functional ======> Data 1/2 \n"))
-  Est1 <- LF(X1, y1, loading.mat, model, intercept, intercept.loading, beta.init1, lambda, mu, prob.filter, rescale, alpha, verbose)
+  Est1 <- LF(X1, y1, loading.mat, model, intercept, intercept.loading, beta.init1, lambda, mu, prob.filter, rescale, verbose)
   if (verbose) cat(sprintf("Call: Inference for Linear Functional ======> Data 2/2 \n"))
-  Est2 <- LF(X2, y2, loading.mat, model, intercept, intercept.loading, beta.init2, lambda, mu, prob.filter, rescale, alpha, verbose)
+  Est2 <- LF(X2, y2, loading.mat, model, intercept, intercept.loading, beta.init2, lambda, mu, prob.filter, rescale, verbose)
 
   est.plugin.vec <- Est2$est.plugin.vec - Est1$est.plugin.vec
   est.debias.vec <- Est2$est.debias.vec - Est1$est.debias.vec
   se.vec <- sqrt((Est1$se.vec)^2 + (Est2$se.vec)^2)
-  ci.mat <- cbind(est.debias.vec - qnorm(1 - alpha / 2) * se.vec, est.debias.vec + qnorm(1 - alpha / 2) * se.vec)
-
-  rownames(ci.mat) <- paste("loading", 1:nrow(ci.mat), sep = "")
-  colnames(ci.mat) <- c("lower", "upper")
 
   if (model %in% c("logistic", "logistic_alter")) {
     ## probability transformation
@@ -102,27 +91,19 @@ CATE <- function(X1, y1, X2, y2, loading.mat, model = c("linear", "logistic", "l
     deriv.fun <- function(x) exp(x) / (1 + exp(x))^2
     prob.se.vec <- sqrt((deriv.fun(Est1$est.debias.vec))^2 * (Est1$se.vec)^2 + (deriv.fun(Est2$est.debias.vec))^2 * (Est2$se.vec)^2)
     prob.debias.vec <- pred.fun(Est2$est.debias.vec) - pred.fun(Est1$est.debias.vec)
-    prob.ci.mat <- cbind(
-      prob.debias.vec - qnorm(1 - alpha / 2) * prob.se.vec,
-      prob.debias.vec + qnorm(1 - alpha / 2) * prob.se.vec
-    )
-    rownames(prob.ci.mat) <- paste("loading", 1:nrow(ci.mat), sep = "")
-    colnames(prob.ci.mat) <- c("lower", "upper")
+
     obj <- list(
       est.plugin.vec = est.plugin.vec,
       est.debias.vec = est.debias.vec,
       se.vec = se.vec,
-      ci.mat = ci.mat,
       prob.debias.vec = prob.debias.vec,
-      prob.se.vec = prob.se.vec,
-      prob.ci.mat = prob.ci.mat
+      prob.se.vec = prob.se.vec
     )
   } else {
     obj <- list(
       est.plugin.vec = est.plugin.vec,
       est.debias.vec = est.debias.vec,
-      se.vec = se.vec,
-      ci.mat = ci.mat
+      se.vec = se.vec
     )
   }
 

@@ -15,21 +15,25 @@
 \arguments{
 \item{object}{An object of class `QF`, a result of a call to `QF`}
 
-\item{probability}{Whether returns CI with probability transformation or not (default=\code{FALSE})}
+\item{probability}{Whether returns CI with probability transformation or not
+(default=\code{FALSE})}
 
-\item{alpha}{Level of significance to construct confidence interval (default=0.05)}
+\item{alpha}{Level of significance to construct confidence interval
+(default=0.05)}
 
-\item{alternative}{Indicates the alternative hypothesis to construct confidence interval and must be one of "two.sided" (default), "less", or "greater".}
+\item{alternative}{Indicates the alternative hypothesis to construct
+confidence interval and must be one of "two.sided" (default), "less", or
+"greater".}
 
 \item{...}{arguments to pass down}
 }
 \value{
-A matrix with columns giving lower and upper confidence limits for bias-corrected
-estimators, with rows corresponding to different tau.
+A matrix with columns giving lower and upper confidence limits for
+  bias-corrected estimators, with rows corresponding to different tau.
 }
 \description{
-Computes confidence intervals for bias-corrected estimators; Each
-row corresponds to a tau value.
+Computes confidence intervals for bias-corrected estimators;
+  Each row corresponds to a tau value.
 }
 \examples{
 \dontrun{

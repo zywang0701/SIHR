@@ -17,7 +17,6 @@ LF(
   mu = NULL,
   prob.filter = 0.05,
   rescale = 1.1,
-  alpha = 0.05,
   verbose = FALSE
 )
 }
@@ -29,8 +28,8 @@ LF(
 \item{loading.mat}{Loading matrix, nrow=\eqn{p}, each column corresponds to a
 loading of interest}
 
-\item{model}{The high dimensional regression model, either \code{"linear"}
-or \code{"logistic"} or \code{"logistic_alter"}}
+\item{model}{The high dimensional regression model, either \code{"linear"} or
+\code{"logistic"} or \code{"logistic_alter"}}
 
 \item{intercept}{Should intercept be fitted for the initial estimator
 (default = \code{TRUE})}
@@ -54,10 +53,8 @@ observations in logistic regression. (default = 0.05)}
 \item{rescale}{The factor to enlarge the standard error to account for the
 finite sample bias. (default = 1.1)}
 
-\item{alpha}{Level of significance to construct two-sided confidence interval
-(default = 0.05)}
-
-\item{verbose}{Should intermediate message(s) be printed. (default = \code{FALSE})}
+\item{verbose}{Should intermediate message(s) be printed. (default =
+\code{FALSE})}
 }
 \value{
 \item{est.plugin.vec}{The vector of plugin(biased) estimators for the
@@ -68,9 +65,6 @@ combination of regression coefficients, length of \code{ncol(loading.mat)};
 each corresponding to a loading of interest}
 \item{se.vec}{The vector of standard errors of the bias-corrected estimators,
 length of \code{ncol(loading.mat)}; each corresponding to a loading of interest}
-\item{ci.mat}{The matrix of two.sided confidence interval for the linear
-combination, of dimension \code{ncol(loading.mat)} x \eqn{2}; each row
-corresponding to a loading of interest}
 \item{proj.mat}{The matrix of projection directions; each column corresponding
 to a loading of interest.}
 }

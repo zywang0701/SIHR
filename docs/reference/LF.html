@@ -105,7 +105,6 @@ generalized linear regression</p>
 <span>  mu <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  prob.filter <span class="op">=</span> <span class="fl">0.05</span>,</span>
 <span>  rescale <span class="op">=</span> <span class="fl">1.1</span>,</span>
-<span>  alpha <span class="op">=</span> <span class="fl">0.05</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -126,8 +125,8 @@ loading of interest</p></dd>
 
 
 <dt>model</dt>
-<dd><p>The high dimensional regression model, either <code>"linear"</code>
-or <code>"logistic"</code> or <code>"logistic_alter"</code></p></dd>
+<dd><p>The high dimensional regression model, either <code>"linear"</code> or
+<code>"logistic"</code> or <code>"logistic_alter"</code></p></dd>
 
 
 <dt>intercept</dt>
@@ -166,13 +165,9 @@ observations in logistic regression. (default = 0.05)</p></dd>
 finite sample bias. (default = 1.1)</p></dd>
 
 
-<dt>alpha</dt>
-<dd><p>Level of significance to construct two-sided confidence interval
-(default = 0.05)</p></dd>
-
-
 <dt>verbose</dt>
-<dd><p>Should intermediate message(s) be printed. (default = <code>FALSE</code>)</p></dd>
+<dd><p>Should intermediate message(s) be printed. (default =
+<code>FALSE</code>)</p></dd>
 
 </dl></div>
     <div id="value">
@@ -191,11 +186,6 @@ each corresponding to a loading of interest</p></dd>
 <dd><p>The vector of standard errors of the bias-corrected estimators,
 length of <code>ncol(loading.mat)</code>; each corresponding to a loading of interest</p></dd>
 
-<dt>ci.mat</dt>
-<dd><p>The matrix of two.sided confidence interval for the linear
-combination, of dimension <code>ncol(loading.mat)</code> x \(2\); each row
-corresponding to a loading of interest</p></dd>
-
 <dt>proj.mat</dt>
 <dd><p>The matrix of projection directions; each column corresponding
 to a loading of interest.</p></dd>
@@ -213,9 +203,9 @@ to a loading of interest.</p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## compute confidence intervals</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="ci.html">ci</a></span><span class="op">(</span><span class="va">Est</span>, alpha <span class="op">=</span> <span class="fl">0.05</span>, alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   loading     lower      upper</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1       1  1.128103  1.6864910</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2       2 -1.418715 -0.9606788</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   loading     lower     upper</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1       1  1.280640  1.901473</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2       2 -1.508168 -1.027004</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## summary statistics</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">Est</span><span class="op">)</span></span></span>
@@ -224,8 +214,8 @@ to a loading of interest.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Estimators: </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  loading est.plugin est.debias Std. Error z value  Pr(&gt;|z|)    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1      1.281      1.407     0.1424   9.879 0.000e+00 ***</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2     -1.094     -1.190     0.1168 -10.182 2.397e-24 ***</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1      1.521      1.591     0.1584   10.05 0.000e+00 ***</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2     -1.215     -1.268     0.1227  -10.33 5.335e-25 ***</span>
 </code></pre></div>
     </div>
   </div>

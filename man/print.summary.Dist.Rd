@@ -7,7 +7,8 @@
 \method{print}{summary.Dist}(x, digits = max(3, getOption("digits") - 3), ...)
 }
 \arguments{
-\item{x}{An object of class `summary.Dist`, a result of a call to `summary.Dist`}
+\item{x}{An object of class `summary.Dist`, a result of a call to
+`summary.Dist`}
 
 \item{digits}{The number of digits to use when printing}
 

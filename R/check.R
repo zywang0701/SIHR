@@ -1,5 +1,5 @@
 check.args.LF <- function(X = NULL, y = NULL, loading.mat = NULL, model = NULL, intercept = NULL, intercept.loading = NULL,
-                          beta.init = NULL, lambda = NULL, mu = NULL, prob.filter = NULL, rescale = NULL, alpha = NULL, verbose = NULL) {
+                          beta.init = NULL, lambda = NULL, mu = NULL, prob.filter = NULL, rescale = NULL, verbose = NULL) {
   if (is.null(X) || !is.numeric(X)) stop("X must be a numeric matrix")
   if (is.null(y) || !is.numeric(y)) stop("y must be a numeric vector")
   if (nrow(X) != length(y)) stop("nrow(X) and length(y) must match")
@@ -39,15 +39,12 @@ check.args.LF <- function(X = NULL, y = NULL, loading.mat = NULL, model = NULL, 
   }
   if (is.null(rescale) || !is.numeric(rescale) || length(rescale) != 1) stop("rescale must be numeric")
   if (is.null(prob.filter) || !is.numeric(prob.filter) || length(prob.filter) != 1 || prob.filter < 0 || prob.filter > 0.5) stop("prob.filter must be numeric in (0,0.5)")
-  if (is.null(alpha) || length(alpha) != 1 || !is.numeric(alpha) || alpha < 0 || alpha > 1) {
-    stop("alpha must be a number between 0 and 1")
-  }
   if (is.null(verbose) || !is.logical(verbose) || length(verbose) != 1) stop("verbose must be a Boolean")
 }
 
 check.args.QF <- function(X = NULL, y = NULL, G = NULL, A = NULL, model = NULL,
                           intercept = NULL, beta.init = NULL, split = NULL, lambda = NULL,
-                          mu = NULL, prob.filter = NULL, rescale = NULL, tau = NULL, alpha = NULL, verbose = NULL) {
+                          mu = NULL, prob.filter = NULL, rescale = NULL, tau = NULL, verbose = NULL) {
   if (is.null(X) || !is.numeric(X)) stop("X must be a numeric matrix")
   if (is.null(y) || !is.numeric(y)) stop("y must be a numeric vector")
   if (nrow(X) != length(y)) stop("nrow(X) and length(y) must match")
@@ -87,15 +84,12 @@ check.args.QF <- function(X = NULL, y = NULL, G = NULL, A = NULL, model = NULL,
   if (is.null(rescale) || !is.numeric(rescale) || length(rescale) != 1) stop("rescale must be numeric")
   if (is.null(prob.filter) || !is.numeric(prob.filter) || length(prob.filter) != 1 || prob.filter < 0 || prob.filter > 0.5) stop("prob.filter must be numeric in (0,0.5)")
   if (is.null(tau) || !is.numeric(tau) || any(tau < 0)) stop("tau must be numeric")
-  if (is.null(alpha) || length(alpha) != 1 || !is.numeric(alpha) || alpha < 0 || alpha > 1) {
-    stop("alpha must be a number between 0 and 1")
-  }
   if (is.null(verbose) || !is.logical(verbose) || length(verbose) != 1) stop("verbose must be a Boolean")
 }
 
 check.args.InnProd <- function(X1 = NULL, y1 = NULL, X2 = NULL, y2 = NULL, G = NULL, A = NULL, model = NULL, intercept = NULL,
                                beta.init1 = NULL, beta.init2 = NULL, split = NULL, lambda = NULL, mu = NULL, prob.filter = NULL,
-                               rescale = NULL, tau = NULL, alpha = NULL, verbose = NULL) {
+                               rescale = NULL, tau = NULL, verbose = NULL) {
   if (is.null(X1) || !is.numeric(X1)) stop("X1 must be a numeric matrix")
   if (is.null(X2) || !is.numeric(X2)) stop("X2 must be a numeric matrix")
   if (is.null(y1) || !is.numeric(y1)) stop("y1 must be a numeric vector")
@@ -151,9 +145,6 @@ check.args.InnProd <- function(X1 = NULL, y1 = NULL, X2 = NULL, y2 = NULL, G = N
   if (is.null(rescale) || !is.numeric(rescale) || length(rescale) != 1) stop("rescale must be numeric")
   if (is.null(prob.filter) || !is.numeric(prob.filter) || length(prob.filter) != 1 || prob.filter < 0 || prob.filter > 0.5) stop("prob.filter must be numeric in (0,0.5)")
   if (is.null(tau) || !is.numeric(tau) || any(tau < 0)) stop("tau must be numeric")
-  if (is.null(alpha) || length(alpha) != 1 || !is.numeric(alpha) || alpha < 0 || alpha > 1) {
-    stop("alpha must be a number between 0 and 1")
-  }
   if (is.null(verbose) || !is.logical(verbose) || length(verbose) != 1) stop("verbose must be a Boolean")
 }
 

@@ -110,7 +110,6 @@ high dimensional generalized linear regressions</h1>
 <span>  mu <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  prob.filter <span class="op">=</span> <span class="fl">0.05</span>,</span>
 <span>  rescale <span class="op">=</span> <span class="fl">1.1</span>,</span>
-<span>  alpha <span class="op">=</span> <span class="fl">0.05</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -141,8 +140,8 @@ loading of interest</p></dd>
 
 
 <dt>model</dt>
-<dd><p>The high dimensional regression model, either <code>"linear"</code>
-or <code>"logistic"</code> or <code>"logistic_alter"</code></p></dd>
+<dd><p>The high dimensional regression model, either <code>"linear"</code> or
+<code>"logistic"</code> or <code>"logistic_alter"</code></p></dd>
 
 
 <dt>intercept</dt>
@@ -186,11 +185,6 @@ observations in logistic regression. (default = 0.05)</p></dd>
 finite sample bias. (default = 1.1)</p></dd>
 
 
-<dt>alpha</dt>
-<dd><p>Level of significance to construct two-sided confidence interval
-(default = 0.05)</p></dd>
-
-
 <dt>verbose</dt>
 <dd><p>Should intermediate message(s) be printed (default =
 <code>FALSE</code>)</p></dd>
@@ -200,8 +194,9 @@ finite sample bias. (default = 1.1)</p></dd>
     <h2>Value</h2>
     
 
-<p>A list consists of plugin estimators, debiased estimators, and confidence intervals.
-For logistic regression, it also returns those items after probability transformation.</p>
+<p>A list consists of plugin estimators, debiased estimators, and
+  confidence intervals. For logistic regression, it also returns those items
+  after probability transformation.</p>
 <dl><dt>est.plugin.vec</dt>
 <dd><p>The vector of plugin(biased) estimators for the
 linear combination of regression coefficients, length of <code>ncol(loading.mat)</code>;
@@ -217,11 +212,6 @@ corresponding to different column in <code>loading.mat</code></p></dd>
 length of <code>ncol(loading.mat)</code>; corresponding to different column in
 <code>loading.mat</code></p></dd>
 
-<dt>ci.mat</dt>
-<dd><p>The matrix of two.sided confidence interval for the linear
-combination, dimension of <code>ncol(loading.mat)</code> x \(2\); the row
-corresponding to different column in <code>loading.mat</code></p></dd>
-
 <dt>prob.debias.vec</dt>
 <dd><p>The vector of bias-corrected estimators after probability
 transformation, length of <code>ncol(loading.mat)</code>; corresponding to different
@@ -231,11 +221,6 @@ column in <code>loading.mat</code>.</p></dd>
 <dd><p>The vector of standard errors of the bias-corrected
 estimators after probability transformation, length of <code>ncol(loading.mat)</code>;
 corresponding to different column in <code>loading.mat</code>.</p></dd>
-
-<dt>prob.ci.mat</dt>
-<dd><p>The matrix of two.sided confidence interval of the bias-corrected
-estimators after probability transformation, dimension of <code>ncol(loading.mat)</code> x \(2\);
-the row corresponding to different column in <code>loading.mat</code>.</p></dd>
 
 </dl></div>
 
@@ -253,8 +238,8 @@ the row corresponding to different column in <code>loading.mat</code>.</p></dd>
 <span class="r-in"><span><span class="co">## compute confidence intervals</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="ci.html">ci</a></span><span class="op">(</span><span class="va">Est</span>, alpha <span class="op">=</span> <span class="fl">0.05</span>, alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   loading      lower     upper</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1       1 -0.4109640 0.3907442</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2       2 -0.3391464 0.2992467</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1       1 -0.2862225 0.5426448</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2       2 -0.4680248 0.1717324</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## summary statistics</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">Est</span><span class="op">)</span></span></span>
@@ -262,9 +247,9 @@ the row corresponding to different column in <code>loading.mat</code>.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Inference for Treatment Effect</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Estimators: </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  loading est.plugin est.debias Std. Error  z value Pr(&gt;|z|)  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        1     0.1040   -0.01011     0.2045 -0.04943   0.9606  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2    -0.1057   -0.01995     0.1629 -0.12250   0.9025  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  loading est.plugin est.debias Std. Error z value Pr(&gt;|z|)  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        1     0.1637     0.1282     0.2114  0.6063   0.5443  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2    -0.1854    -0.1481     0.1632 -0.9077   0.3640  </span>
 </code></pre></div>
     </div>
   </div>

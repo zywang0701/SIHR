@@ -2,8 +2,9 @@
 % Please edit documentation in R/Dist.R
 \name{Dist}
 \alias{Dist}
-\title{Inference for weighted quadratic functional of difference of the regression vectors (excluding the intercept term) in
-high dimensional generalized linear regressions.}
+\title{Inference for weighted quadratic functional of difference of the regression
+vectors (excluding the intercept term) in high dimensional generalized linear
+regressions.}
 \usage{
 Dist(
   X1,
@@ -22,62 +23,74 @@ Dist(
   prob.filter = 0.05,
   rescale = 1.1,
   tau = c(0.25, 0.5, 1),
-  alpha = 0.05,
   verbose = FALSE
 )
 }
 \arguments{
-\item{X1}{Design matrix for the first sample, of dimension \eqn{n_1} x \eqn{p}}
+\item{X1}{Design matrix for the first sample, of dimension \eqn{n_1} x
+\eqn{p}}
 
 \item{y1}{Outcome vector for the first sample, of length \eqn{n_1}}
 
-\item{X2}{Design matrix for the second sample, of dimension \eqn{n_2} x \eqn{p}}
+\item{X2}{Design matrix for the second sample, of dimension \eqn{n_2} x
+\eqn{p}}
 
 \item{y2}{Outcome vector for the second sample, of length \eqn{n_1}}
 
 \item{G}{The set of indices, \code{G} in the quadratic form}
 
-\item{A}{The matrix A in the quadratic form, of dimension \eqn{|G|\times}\eqn{|G|}. If \code{NULL} A would be set as the \eqn{|G|\times}\eqn{|G|} submatrix of the population covariance matrix corresponding to the index set \code{G} (default = \code{NULL})}
+\item{A}{The matrix A in the quadratic form, of dimension
+\eqn{|G|\times}\eqn{|G|}. If \code{NULL} A would be set as the
+\eqn{|G|\times}\eqn{|G|} submatrix of the population covariance matrix
+corresponding to the index set \code{G} (default = \code{NULL})}
 
-\item{model}{The high dimensional regression model, either \code{"linear"} or \code{"logistic"} or \code{"logistic_alter"}}
+\item{model}{The high dimensional regression model, either \code{"linear"} or
+\code{"logistic"} or \code{"logistic_alter"}}
 
-\item{intercept}{Should intercept(s) be fitted for the initial estimators (default = \code{TRUE})}
+\item{intercept}{Should intercept(s) be fitted for the initial estimators
+(default = \code{TRUE})}
 
-\item{beta.init1}{The initial estimator of the regression vector for the 1st data (default = \code{NULL})}
+\item{beta.init1}{The initial estimator of the regression vector for the 1st
+data (default = \code{NULL})}
 
-\item{beta.init2}{The initial estimator of the regression vector for the 2nd data (default = \code{NULL})}
+\item{beta.init2}{The initial estimator of the regression vector for the 2nd
+data (default = \code{NULL})}
 
 \item{split}{Sampling splitting or not for computing the initial estimators.
-It take effects only when \code{beta.init1 =  NULL} or \code{beta.init2 = NULL}. (default = \code{TRUE})}
+It take effects only when \code{beta.init1 =  NULL} or \code{beta.init2 =
+NULL}. (default = \code{TRUE})}
 
-\item{lambda}{The tuning parameter in fitting initial model. If \code{NULL}, it will be picked by cross-validation. (default = \code{NULL})}
+\item{lambda}{The tuning parameter in fitting initial model. If \code{NULL},
+it will be picked by cross-validation. (default = \code{NULL})}
 
-\item{mu}{The dual tuning parameter used in the construction of the projection direction. If \code{NULL} it will be searched automatically. (default = \code{NULL})}
+\item{mu}{The dual tuning parameter used in the construction of the
+projection direction. If \code{NULL} it will be searched automatically.
+(default = \code{NULL})}
 
-\item{prob.filter}{The threshold of estimated probabilities for filtering observations in logistic regression. (default = 0.05)}
+\item{prob.filter}{The threshold of estimated probabilities for filtering
+observations in logistic regression. (default = 0.05)}
 
-\item{rescale}{The factor to enlarge the standard error to account for the finite sample bias. (default = 1.1)}
+\item{rescale}{The factor to enlarge the standard error to account for the
+finite sample bias. (default = 1.1)}
 
 \item{tau}{The enlargement factor for asymptotic variance of the
 bias-corrected estimator to handle super-efficiency. It allows for a scalar
 or vector. (default = \code{c(0.25,0.5, 1)})}
 
-\item{alpha}{Level of significance to construct two-sided confidence interval (default = 0.05)}
-
-\item{verbose}{Should intermediate message(s) be printed. (default = \code{FALSE})}
+\item{verbose}{Should intermediate message(s) be printed. (default =
+\code{FALSE})}
 }
 \value{
-\item{est.plugin}{The plugin(biased) estimator for the quadratic form of the regression vectors restricted to \code{G}}
-\item{est.debias}{The bias-corrected estimator of the quadratic form of the regression vectors}
+\item{est.plugin}{The plugin(biased) estimator for the quadratic form
+of the regression vectors restricted to \code{G}} \item{est.debias}{The
+bias-corrected estimator of the quadratic form of the regression vectors}
 \item{se}{Standard errors of the bias-corrected estimator,
 length of \code{tau}; corrsponding to different values of \code{tau}}
-\item{ci.mat}{The matrix of two.sided confidence interval for the quadratic
-form of the regression vector; row corresponds to different values of
-\code{tau}}
 }
 \description{
-Inference for weighted quadratic functional of difference of the regression vectors (excluding the intercept term) in
-high dimensional generalized linear regressions.
+Inference for weighted quadratic functional of difference of the regression
+vectors (excluding the intercept term) in high dimensional generalized linear
+regressions.
 }
 \examples{
 X1 <- matrix(rnorm(100 * 5), nrow = 100, ncol = 5)
@@ -87,5 +100,10 @@ y2 <- -0.4 + X2[, 1] * 0.48 + X2[, 2] * 1.1 + rnorm(90)
 G <- c(1, 2)
 A <- matrix(c(1.5, 0.8, 0.8, 1.5), nrow = 2, ncol = 2)
 Est <- Dist(X1, y1, X2, y2, G, A, model = "linear")
-Est$ci
+
+## compute confidence intervals
+ci(Est, alpha = 0.05, alternative = "two.sided")
+
+## summary statistics
+summary(Est)
 }
